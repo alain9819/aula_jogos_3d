@@ -776,54 +776,70 @@
                     <pre>&lt;link rel="stylesheet" href="style.css"&gt;</pre>
                 </div>
 
-                <h3>Passo 2.2 — Conectar o CSS e o JavaScript</h3>
+                <h3>Passo 2.2 — Configuração dos módulos do Three.js</h3>
                 <div class="code-block">
                     <div class="code-header">
-                        <span>Conexão de Arquivos</span>
+                        <span>index.html</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
                     </div>
-                    <pre>&lt;link rel="stylesheet" href="style.css"&gt;
-&lt;script type="module" src="game.js"&gt;&lt;/script&gt;</pre><pre>&nbsp; &nbsp; &lt;!-- Configuração dos módulos do Three.js --&gt;<br>&nbsp; &nbsp; &lt;script type="importmap"&gt;<br>&nbsp; &nbsp; &nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "imports": {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &lt;/script&gt;</pre>
+                    <pre>&nbsp; &nbsp;<br>&nbsp; &nbsp; &lt;script type="importmap"&gt;<br>&nbsp; &nbsp; &nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "imports": {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &lt;/script&gt;</pre>
                 </div>
 
-                <h3>Passo 2.3 — Conectar o CSS e o JavaScript</h3>
+                <h3>Passo 2.3 — Interface do jogo</h3>
                 <div class="code-block">
                     <div class="code-header">
-                        <span>Conexão de Arquivos</span>
+                        <span>index.html</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
                     </div>
-                    <pre>&lt;link rel="stylesheet" href="style.css"&gt;
-&lt;script type="module" src="game.js"&gt;&lt;/script&gt;</pre>
+                    <p>&nbsp; &nbsp; &lt;header id="interface"&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;div class="titulo"&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;h1&gt;Meu Primeiro Mundo 3D&lt;/h1&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;p&gt;Explore o campo e descubra o ambiente!&lt;/p&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;div id="status"&gt;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Carregando mundo 3D...<br>&nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
+<p>&nbsp; &nbsp; &lt;/header&gt;</p>
                 </div>
 
-                <h3>Passo 2.4 — Conectar o CSS e o JavaScript</h3>
+                <h3>Passo 2.4 — Área onde o jogo será renderizado</h3>
                 <div class="code-block">
                     <div class="code-header">
-                        <span>Conexão de Arquivos</span>
+                        <span>index.html</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
                     </div>
-                    <pre>&lt;link rel="stylesheet" href="style.css"&gt;
-&lt;script type="module" src="game.js"&gt;&lt;/script&gt;</pre>
+                    <p>&nbsp; &nbsp; &lt;main id="jogo"&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;div id="mensagem"&gt;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Preparando o mundo 3D...<br>&nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
+<p>&nbsp; &nbsp; &lt;/main&gt;</p>
                 </div>
 
-                <h3>Passo 2.5 — Conectar o CSS e o JavaScript</h3>
+                <h3>Passo 2.5 — Controles</h3>
                 <div class="code-block">
                     <div class="code-header">
-                        <span>Conexão de Arquivos</span>
+                        <span>index.html</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
                     </div>
-                    <pre>&lt;link rel="stylesheet" href="style.css"&gt;
-&lt;script type="module" src="game.js"&gt;&lt;/script&gt;</pre>
+                    <p><br>&nbsp; &nbsp; &lt;footer id="controles"&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;div class="controle"&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;strong&gt;W A S D&lt;/strong&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;span&gt;ou setas do teclado&lt;/span&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;div class="controle"&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;strong&gt;MOVIMENTAÇÃO&lt;/strong&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;span&gt;Explore o campo&lt;/span&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;div class="controle"&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;strong&gt;CÂMERA&lt;/strong&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;span&gt;Acompanha o personagem&lt;/span&gt;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
+<p>&nbsp; &nbsp; &lt;/footer&gt;</p>
                 </div>
 
                 <h3>Passo 2.6 — Conectar o CSS e o JavaScript</h3>
                 <div class="code-block">
                     <div class="code-header">
-                        <span>Conexão de Arquivos</span>
+                        <span>index.html</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
                     </div>
-                    <pre>&lt;link rel="stylesheet" href="style.css"&gt;
-&lt;script type="module" src="game.js"&gt;&lt;/script&gt;</pre>
+                    <pre>&lt;script type="module" src="game.js"&gt;&lt;/script&gt;</pre>
                 </div>
 
                 <div class="activity-box">
