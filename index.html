@@ -916,11 +916,19 @@
                         <span>game.js</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
                     </div>
-                    <pre>import * as THREE from 'three';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-
-const cena = new THREE.Scene();
-cena.background = new THREE.Color(0x87ceeb); // Azul claro do céu</pre>
+                    <p>// ==================================================<br>// 1. IMPORTAR O THREE.JS e DRACOLoader<br>// ==================================================</p>
+<p>import * as THREE from 'three';</p>
+<p>import { GLTFLoader } from<br>&nbsp; &nbsp; 'three/addons/loaders/GLTFLoader.js';</p>
+<p>import { DRACOLoader } from<br>&nbsp; &nbsp; 'three/addons/loaders/DRACOLoader.js';<br>&nbsp; &nbsp;&nbsp;<br>// ==================================================<br>// 2. ELEMENTOS DA PÁGINA<br>// ==================================================</p>
+<p>const areaJogo = document.getElementById('jogo');</p>
+<p>const mensagem = document.getElementById('mensagem');</p>
+<p>const status = document.getElementById('status');</p>
+<p><br>// ==================================================<br>// 3. CRIAR A CENA 3D<br>// ==================================================</p>
+<p>const cena = new THREE.Scene();</p>
+<p>// Cor do céu</p>
+<p>cena.background = new THREE.Color(0x87ceeb);</p>
+<p>// Neblina para dar profundidade ao cenário</p>
+<p>cena.fog = new THREE.Fog(<br>&nbsp; &nbsp; 0x87ceeb,<br>&nbsp; &nbsp; 35,<br>&nbsp; &nbsp; 100<br>);</p>
                 </div>
 
                 <div class="table-responsive">
@@ -963,18 +971,33 @@ cena.background = new THREE.Color(0x87ceeb); // Azul claro do céu</pre>
                         <span>game.js</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
                     </div>
-                    <pre>const camera = new THREE.PerspectiveCamera(
-    60, // Campo de visão (FOV)
-    areaJogo.clientWidth / areaJogo.clientHeight, // Proporção
-    0.1, // Distância mínima
-    200  // Distância máxima
-);
-
-camera.position.set(0, 7, 10); // Posição inicial X, Y, Z
-
-const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setSize(areaJogo.clientWidth, areaJogo.clientHeight);
-areaJogo.appendChild(renderer.domElement);</pre>
+                    <p><br>// ==================================================<br>// 4. CRIAR A CÂMERA<br>// ==================================================</p>
+<p>const camera = new THREE.PerspectiveCamera(</p>
+<p>&nbsp; &nbsp; 60,</p>
+<p>&nbsp; &nbsp; areaJogo.clientWidth / areaJogo.clientHeight,</p>
+<p>&nbsp; &nbsp; 0.1,</p>
+<p>&nbsp; &nbsp; 200</p>
+<p>);</p>
+<p>// Posição inicial da câmera</p>
+<p>camera.position.set(0, 7, 10);</p>
+<p><br>// ==================================================<br>// 5. CRIAR O RENDERIZADOR<br>// ==================================================</p>
+<p>const renderer = new THREE.WebGLRenderer({</p>
+<p>&nbsp; &nbsp; antialias: true</p>
+<p>});</p>
+<p>renderer.setSize(</p>
+<p>&nbsp; &nbsp; areaJogo.clientWidth,</p>
+<p>&nbsp; &nbsp; areaJogo.clientHeight</p>
+<p>);</p>
+<p>renderer.setPixelRatio(</p>
+<p>&nbsp; &nbsp; Math.min(window.devicePixelRatio, 2)</p>
+<p>);</p>
+<p>// Configurar sombras</p>
+<p>renderer.shadowMap.enabled = true;</p>
+<p>renderer.shadowMap.type = THREE.PCFSoftShadowMap;</p>
+<p>// Ajustar a saída de cores</p>
+<p>renderer.outputColorSpace = THREE.SRGBColorSpace;</p>
+<p>// Adicionar o canvas à página</p>
+<p>areaJogo.appendChild(renderer.domElement);</p>
                 </div>
 
                 <div class="activity-box">
@@ -1005,15 +1028,27 @@ areaJogo.appendChild(renderer.domElement);</pre>
                         <span>game.js</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
                     </div>
-                    <pre>// Luz do Céu e Solo
-const luzAmbiente = new THREE.HemisphereLight(0xffffff, 0x567d46, 2);
-cena.add(luzAmbiente);
-
-// Luz do Sol (Projeta Sombras)
-const sol = new THREE.DirectionalLight(0xffffff, 3);
-sol.position.set(15, 25, 10);
-sol.castShadow = true;
-cena.add(sol);</pre>
+                    <p><br>// ==================================================<br>// 6. ILUMINAÇÃO DO AMBIENTE<br>// ==================================================</p>
+<p>// Luz ambiente</p>
+<p>const luzAmbiente = new THREE.HemisphereLight(</p>
+<p>&nbsp; &nbsp; 0xffffff,</p>
+<p>&nbsp; &nbsp; 0x567d46,</p>
+<p>&nbsp; &nbsp; 2</p>
+<p>);</p>
+<p>cena.add(luzAmbiente);</p>
+<p><br>// Luz do sol</p>
+<p>const sol = new THREE.DirectionalLight(</p>
+<p>&nbsp; &nbsp; 0xffffff,</p>
+<p>&nbsp; &nbsp; 3</p>
+<p>);</p>
+<p>sol.position.set(15, 25, 10);</p>
+<p>sol.castShadow = true;</p>
+<p>sol.shadow.mapSize.set(1024, 1024);</p>
+<p>sol.shadow.camera.left = -25;</p>
+<p>sol.shadow.camera.right = 25;</p>
+<p>sol.shadow.camera.top = 25;</p>
+<p>sol.shadow.camera.bottom = -25;</p>
+<p>cena.add(sol);</p>
                 </div>
 
                 <div class="activity-box">
@@ -1041,16 +1076,30 @@ cena.add(sol);</pre>
                         <span>game.js</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
                     </div>
-                    <pre>const geometriaChao = new THREE.PlaneGeometry(100, 100);
-const materialChao = new THREE.MeshStandardMaterial({
-    color: 0x4caf50, // Verde grama
-    roughness: 1
-});
-
-const chao = new THREE.Mesh(geometriaChao, materialChao);
-chao.rotation.x = -Math.PI / 2; // Gira o plano para ficar na horizontal
-chao.receiveShadow = true;
-cena.add(chao);</pre>
+                    <p><br>// ==================================================<br>// 7. CRIAR O CAMPO<br>// ==================================================</p>
+<p>// Geometria do chão</p>
+<p>const geometriaChao = new THREE.PlaneGeometry(</p>
+<p>&nbsp; &nbsp; 100,</p>
+<p>&nbsp; &nbsp; 100</p>
+<p>);</p>
+<p>// Material da grama</p>
+<p>const materialChao = new THREE.MeshStandardMaterial({</p>
+<p>&nbsp; &nbsp; color: 0x4caf50,</p>
+<p>&nbsp; &nbsp; roughness: 1</p>
+<p>});</p>
+<p>// Criar o chão</p>
+<p>const chao = new THREE.Mesh(</p>
+<p>&nbsp; &nbsp; geometriaChao,</p>
+<p>&nbsp; &nbsp; materialChao</p>
+<p>);</p>
+<p>// Deitar o plano para formar o chão</p>
+<p>chao.rotation.x = -Math.PI / 2;</p>
+<p>// Posicionar no nível do solo</p>
+<p>chao.position.y = 0;</p>
+<p>// Receber sombras</p>
+<p>chao.receiveShadow = true;</p>
+<p>// Adicionar à cena</p>
+<p>cena.add(chao);</p>
                 </div>
 
                 <div class="activity-box challenge">
@@ -1077,26 +1126,92 @@ cena.add(chao);</pre>
                         <span>game.js</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
                     </div>
-                    <pre>function criarArvore(x, z) {
-    // Tronco
-    const geoTronco = new THREE.CylinderGeometry(0.2, 0.3, 1.5, 8);
-    const matTronco = new THREE.MeshStandardMaterial({ color: 0x8b5a2b });
-    const tronco = new THREE.Mesh(geoTronco, matTronco);
-    tronco.position.set(x, 0.75, z);
-    cena.add(tronco);
-
-    // Copa da árvore
-    const geoCopa = new THREE.ConeGeometry(1.2, 2.5, 8);
-    const matCopa = new THREE.MeshStandardMaterial({ color: 0x2e7d32 });
-    const copa = new THREE.Mesh(geoCopa, matCopa);
-    copa.position.set(x, 2.5, z);
-    cena.add(copa);
-}
-
-// Chamar a função em posições diferentes
-criarArvore(10, 15);
-criarArvore(-10, 15);
-criarArvore(5, -10);</pre>
+                    <p><br>// ==================================================<br>// 8. CRIAR ÁRVORES<br>// ==================================================</p>
+<p>function criarArvore(x, z) {</p>
+<p>&nbsp; &nbsp; // Tronco</p>
+<p>&nbsp; &nbsp; const geometriaTronco = new THREE.CylinderGeometry(</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; 0.2,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; 0.3,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; 1.5,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; 8</p>
+<p>&nbsp; &nbsp; );</p>
+<p>&nbsp; &nbsp; const materialTronco = new THREE.MeshStandardMaterial({</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; color: 0x795548</p>
+<p>&nbsp; &nbsp; });</p>
+<p>&nbsp; &nbsp; const tronco = new THREE.Mesh(</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; geometriaTronco,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; materialTronco</p>
+<p>&nbsp; &nbsp; );</p>
+<p>&nbsp; &nbsp; tronco.position.set(</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; x,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; 0.75,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; z</p>
+<p>&nbsp; &nbsp; );</p>
+<p>&nbsp; &nbsp; tronco.castShadow = true;</p>
+<p>&nbsp; &nbsp; tronco.receiveShadow = true;</p>
+<p>&nbsp; &nbsp; cena.add(tronco);</p>
+<p><br>&nbsp; &nbsp; // Copa da árvore</p>
+<p>&nbsp; &nbsp; const geometriaCopa = new THREE.ConeGeometry(</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; 1.2,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; 2.5,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; 8</p>
+<p>&nbsp; &nbsp; );</p>
+<p>&nbsp; &nbsp; const materialCopa = new THREE.MeshStandardMaterial({</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; color: 0x2e7d32</p>
+<p>&nbsp; &nbsp; });</p>
+<p>&nbsp; &nbsp; const copa = new THREE.Mesh(</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; geometriaCopa,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; materialCopa</p>
+<p>&nbsp; &nbsp; );</p>
+<p>&nbsp; &nbsp; copa.position.set(</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; x,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; 2.5,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; z</p>
+<p>&nbsp; &nbsp; );</p>
+<p>&nbsp; &nbsp; copa.castShadow = true;</p>
+<p>&nbsp; &nbsp; cena.add(copa);</p>
+<p>}</p>
+<p><br>// Criar árvores nas bordas do cenário</p>
+<p>for (let i = -40; i &lt;= 40; i += 10) {</p>
+<p>&nbsp; &nbsp; criarArvore(i, -35);</p>
+<p>&nbsp; &nbsp; criarArvore(i, 35);</p>
+<p>&nbsp; &nbsp; criarArvore(-35, i);</p>
+<p>&nbsp; &nbsp; criarArvore(35, i);</p>
+<p>}</p>
+<p><br>// ==================================================<br>// 9. CRIAR PEDRAS DECORATIVAS<br>// ==================================================</p>
+<p>function criarPedra(x, z) {</p>
+<p>&nbsp; &nbsp; const geometria = new THREE.DodecahedronGeometry(</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; 0.5,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; 0</p>
+<p>&nbsp; &nbsp; );</p>
+<p>&nbsp; &nbsp; const material = new THREE.MeshStandardMaterial({</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; color: 0x808080,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; roughness: 1</p>
+<p>&nbsp; &nbsp; });</p>
+<p>&nbsp; &nbsp; const pedra = new THREE.Mesh(</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; geometria,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; material</p>
+<p>&nbsp; &nbsp; );</p>
+<p>&nbsp; &nbsp; pedra.position.set(</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; x,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; 0.3,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; z</p>
+<p>&nbsp; &nbsp; );</p>
+<p>&nbsp; &nbsp; pedra.rotation.set(</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; Math.random(),</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; Math.random(),</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; Math.random()</p>
+<p>&nbsp; &nbsp; );</p>
+<p>&nbsp; &nbsp; pedra.castShadow = true;</p>
+<p>&nbsp; &nbsp; pedra.receiveShadow = true;</p>
+<p>&nbsp; &nbsp; cena.add(pedra);</p>
+<p>}</p>
+<p><br>// Distribuir pedras pelo campo</p>
+<p>for (let i = 0; i &lt; 25; i++) {</p>
+<p>&nbsp; &nbsp; const x = Math.random() * 50 - 25;</p>
+<p>&nbsp; &nbsp; const z = Math.random() * 50 - 25;</p>
+<p>&nbsp; &nbsp; criarPedra(x, z);</p>
+<p>}</p>
                 </div>
 
                 <div class="activity-box">
@@ -1126,18 +1241,94 @@ criarArvore(5, -10);</pre>
                         <span>game.js</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
                     </div>
-                    <pre>const carregador = new GLTFLoader();
-
-carregador.load('./assets/personagem.glb', function (gltf) {
-    const modelo = gltf.scene;
-    
-    // Ajustar escala automaticamente com Box3
-    const caixaInicial = new THREE.Box3().setFromObject(modelo);
-    const tamanho = new THREE.Vector3();
-    caixaInicial.getSize(tamanho);
-
-    personagem.add(modelo);
-});</pre>
+                    <p><br>// ==================================================<br>// 10. CRIAR O PERSONAGEM<br>// ==================================================</p>
+<p>// Grupo que controla a posição e a direção do personagem</p>
+<p>const personagem = new THREE.Group();</p>
+<p>cena.add(personagem);</p>
+<p><br>// Posição inicial</p>
+<p>personagem.position.set(0, 0, 0);</p>
+<p><br>// Variáveis do modelo</p>
+<p>let modeloCarregado = false;</p>
+<p>let mixer = null;</p>
+<p><br>// Carregador de modelos comprimidos com Draco</p>
+<p>const dracoLoader = new DRACOLoader();</p>
+<p>dracoLoader.setDecoderPath(<br>&nbsp; &nbsp; 'https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/libs/draco/'<br>);</p>
+<p>// Carregador de modelos 3D</p>
+<p>const carregador = new GLTFLoader();</p>
+<p>carregador.setDRACOLoader(dracoLoader);</p>
+<p><br>// Importar o arquivo GLB</p>
+<p>carregador.load(</p>
+<p>&nbsp; &nbsp; './assets/personagem.glb',<br>&nbsp; &nbsp;&nbsp;</p>
+<p>&nbsp; &nbsp; function (gltf) {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; const modelo = gltf.scene;</p>
+<p><br>&nbsp; &nbsp; &nbsp; &nbsp; // Calcular o tamanho original do modelo</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; const caixaInicial = new THREE.Box3()</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .setFromObject(modelo);</p>
+<p><br>&nbsp; &nbsp; &nbsp; &nbsp; const tamanhoInicial = new THREE.Vector3();</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; caixaInicial.getSize(tamanhoInicial);</p>
+<p><br>&nbsp; &nbsp; &nbsp; &nbsp; // Ajustar a escala automaticamente</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; const maiorDimensao = Math.max(</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; tamanhoInicial.x,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; tamanhoInicial.y,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; tamanhoInicial.z</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; );</p>
+<p><br>&nbsp; &nbsp; &nbsp; &nbsp; if (maiorDimensao &gt; 0) {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const escala = 1.8 / maiorDimensao;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; modelo.scale.setScalar(escala);</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p><br>&nbsp; &nbsp; &nbsp; &nbsp; // Centralizar o modelo horizontalmente</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; const centroInicial = new THREE.Box3()</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .setFromObject(modelo)</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .getCenter(new THREE.Vector3());</p>
+<p><br>&nbsp; &nbsp; &nbsp; &nbsp; modelo.position.x -= centroInicial.x;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; modelo.position.z -= centroInicial.z;</p>
+<p><br>&nbsp; &nbsp; &nbsp; &nbsp; // Ajustar os pés ao nível do chão</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; const caixaFinal = new THREE.Box3()</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .setFromObject(modelo);</p>
+<p><br>&nbsp; &nbsp; &nbsp; &nbsp; modelo.position.y -= caixaFinal.min.y;</p>
+<p><br>&nbsp; &nbsp; &nbsp; &nbsp; // Configurar sombras</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; modelo.traverse(function (objeto) {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (objeto.isMesh) {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; objeto.castShadow = true;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; objeto.receiveShadow = true;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; });</p>
+<p><br>&nbsp; &nbsp; &nbsp; &nbsp; // Adicionar o modelo ao personagem</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; personagem.add(modelo);</p>
+<p><br>&nbsp; &nbsp; &nbsp; &nbsp; // Preparar animações, caso o arquivo possua alguma</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; if (gltf.animations.length &gt; 0) {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mixer = new THREE.AnimationMixer(modelo);</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const animacao = mixer.clipAction(</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; gltf.animations[0]</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; );</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; animacao.play();</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p><br>&nbsp; &nbsp; &nbsp; &nbsp; modeloCarregado = true;</p>
+<p><br>&nbsp; &nbsp; &nbsp; &nbsp; mensagem.style.display = 'none';</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; status.textContent = 'Explore o campo!';</p>
+<p><br>&nbsp; &nbsp; &nbsp; &nbsp; console.log('Personagem carregado com sucesso!');</p>
+<p>&nbsp; &nbsp; },</p>
+<p>&nbsp; &nbsp; function (progresso) {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; if (progresso.total &gt; 0) {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const porcentagem = Math.round(</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; progresso.loaded / progresso.total * 100</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; );</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; mensagem.textContent =</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; `Carregando personagem: ${porcentagem}%`;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p>&nbsp; &nbsp; },</p>
+<p>&nbsp; &nbsp; undefined,</p>
+<p>&nbsp; &nbsp; function (erro) {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; console.error(</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 'Erro ao carregar o personagem:',</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; erro</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; );</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; mensagem.textContent =</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 'Não foi possível carregar o personagem. ' +</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 'Verifique o arquivo assets/personagem.glb.';</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; status.textContent = 'Erro ao carregar o modelo';</p>
+<p>&nbsp; &nbsp; }</p>
+<p>);</p>
                 </div>
 
                 <div class="activity-box">
@@ -1165,21 +1356,34 @@ carregador.load('./assets/personagem.glb', function (gltf) {
                         <span>game.js</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
                     </div>
-                    <pre>const teclas = {};
-
-window.addEventListener('keydown', (e) => teclas[e.key.toLowerCase()] = true);
-window.addEventListener('keyup', (e) => teclas[e.key.toLowerCase()] = false);
-
-// No loop principal do jogo:
-if (teclas['w'] || teclas['arrowup']) direcao.z -= 1;
-if (teclas['s'] || teclas['arrowdown']) direcao.z += 1;
-if (teclas['a'] || teclas['arrowleft']) direcao.x -= 1;
-if (teclas['d'] || teclas['arrowright']) direcao.x += 1;
-
-direcao.normalize(); // Evita velocidade maior na diagonal
-
-personagem.position.x += direcao.x * velocidade * delta;
-personagem.position.z += direcao.z * velocidade * delta;</pre>
+                   <p><br>// ==================================================<br>// 11. CONTROLES DO TECLADO<br>// ==================================================</p>
+<p>// Registrar as teclas pressionadas</p>
+<p>const teclas = {};</p>
+<p><br>// Detectar quando uma tecla é pressionada</p>
+<p>window.addEventListener('keydown', function (evento) {</p>
+<p>&nbsp; &nbsp; const tecla = evento.key.toLowerCase();</p>
+<p><br>&nbsp; &nbsp; if (</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; tecla === 'w' ||</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; tecla === 'a' ||</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; tecla === 's' ||</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; tecla === 'd' ||</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; tecla.startsWith('arrow')</p>
+<p>&nbsp; &nbsp; ) {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; evento.preventDefault();</p>
+<p>&nbsp; &nbsp; }</p>
+<p><br>&nbsp; &nbsp; teclas[tecla] = true;</p>
+<p>});</p>
+<p><br>// Detectar quando uma tecla é solta</p>
+<p>window.addEventListener('keyup', function (evento) {</p>
+<p>&nbsp; &nbsp; const tecla = evento.key.toLowerCase();</p>
+<p>&nbsp; &nbsp; teclas[tecla] = false;</p>
+<p>});</p>
+<p><br>// Evitar que as teclas continuem pressionadas<br>// se a janela perder o foco</p>
+<p>window.addEventListener('blur', function () {</p>
+<p>&nbsp; &nbsp; for (const tecla in teclas) {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; teclas[tecla] = false;</p>
+<p>&nbsp; &nbsp; }</p>
+<p>});</p>
                 </div>
 
                 <div class="activity-box">
@@ -1231,10 +1435,12 @@ personagem.position.z += direcao.z * velocidade * delta;</pre>
                         <span>game.js</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
                     </div>
-                    <pre>const limiteCampo = 30;
-
-personagem.position.x = THREE.MathUtils.clamp(personagem.position.x, -limiteCampo, limiteCampo);
-personagem.position.z = THREE.MathUtils.clamp(personagem.position.z, -limiteCampo, limiteCampo);</pre>
+                   <p><br>// ==================================================<br>// 12. CONFIGURAR A MOVIMENTAÇÃO<br>// ==================================================</p>
+<p>const velocidade = 6;</p>
+<p><br>// Limites do campo</p>
+<p>const limiteCampo = 30;</p>
+<p><br>// Vetor para a direção do movimento</p>
+<p>const direcao = new THREE.Vector3();</p>
                 </div>
             </section>
 
@@ -1256,15 +1462,10 @@ personagem.position.z = THREE.MathUtils.clamp(personagem.position.z, -limiteCamp
                         <span>game.js</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
                     </div>
-                    <pre>const posicaoDesejada = new THREE.Vector3(
-    personagem.position.x,
-    personagem.position.y + 6,
-    personagem.position.z + 9
-);
-
-// Interpolação suave (Lerp)
-camera.position.lerp(posicaoDesejada, 1 - Math.exp(-4 * delta));
-camera.lookAt(personagem.position);</pre>
+                   <p><br>// ==================================================<br>// 13. ACOMPANHAR O PERSONAGEM COM A CÂMERA<br>// ==================================================</p>
+<p>const alvoCamera = new THREE.Vector3();</p>
+<p><br>// ==================================================<br>// 14. RELÓGIO PARA CONTROLAR O TEMPO<br>// ==================================================</p>
+<p>const relogio = new THREE.Clock();</p>
                 </div>
             </section>
 
@@ -1286,17 +1487,115 @@ camera.lookAt(personagem.position);</pre>
                         <span>game.js</span>
                         <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
                     </div>
-                    <pre>function animar() {
-    requestAnimationFrame(animar);
-
-    const delta = Math.min(relogio.getDelta(), 0.05);
-
-    // Atualiza lógica, posições e controles aqui
-    
-    renderer.render(cena, camera);
-}
-
-animar(); // Inicia o loop</pre>
+                    <p><br>// ==================================================<br>// 15. FUNÇÃO PRINCIPAL DO JOGO<br>// ==================================================</p>
+<p>function animar() {</p>
+<p>&nbsp; &nbsp; requestAnimationFrame(animar);</p>
+<p><br>&nbsp; &nbsp; // Calcular o tempo transcorrido</p>
+<p>&nbsp; &nbsp; const delta = Math.min(</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; relogio.getDelta(),</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; 0.05</p>
+<p>&nbsp; &nbsp; );</p>
+<p><br>&nbsp; &nbsp; // Atualizar animações do modelo</p>
+<p>&nbsp; &nbsp; if (mixer) {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; mixer.update(delta);</p>
+<p>&nbsp; &nbsp; }</p>
+<p><br>&nbsp; &nbsp; // ==================================================<br>&nbsp; &nbsp; // MOVIMENTAR O PERSONAGEM<br>&nbsp; &nbsp; // ==================================================</p>
+<p>&nbsp; &nbsp; if (modeloCarregado) {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; // Zerar a direção antes de calcular o movimento</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; direcao.set(0, 0, 0);</p>
+<p><br>&nbsp; &nbsp; &nbsp; &nbsp; // Movimentação horizontal</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; if (</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; teclas['w'] ||</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; teclas['arrowup']</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; ) {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; direcao.z -= 1;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p><br>&nbsp; &nbsp; &nbsp; &nbsp; if (</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; teclas['s'] ||</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; teclas['arrowdown']</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; ) {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; direcao.z += 1;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p><br>&nbsp; &nbsp; &nbsp; &nbsp; // Movimentação lateral</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; if (</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; teclas['a'] ||</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; teclas['arrowleft']</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; ) {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; direcao.x -= 1;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p><br>&nbsp; &nbsp; &nbsp; &nbsp; if (</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; teclas['d'] ||</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; teclas['arrowright']</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; ) {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; direcao.x += 1;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p><br>&nbsp; &nbsp; &nbsp; &nbsp; // Verificar se existe movimento</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; if (direcao.lengthSq() &gt; 0) {</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Normalizar evita que a diagonal<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // seja mais rápida que o movimento reto</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; direcao.normalize();</p>
+<p><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Movimentar o personagem</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; personagem.position.x +=</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; direcao.x * velocidade * delta;</p>
+<p><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; personagem.position.z +=</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; direcao.z * velocidade * delta;</p>
+<p><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // Girar o personagem na direção do movimento</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; personagem.rotation.y = Math.atan2(</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; direcao.x,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; direcao.z</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; );</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
+<p><br>&nbsp; &nbsp; &nbsp; &nbsp; // Impedir que o personagem saia do campo</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; personagem.position.x = THREE.MathUtils.clamp(</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; personagem.position.x,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -limiteCampo,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; limiteCampo</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; );</p>
+<p><br>&nbsp; &nbsp; &nbsp; &nbsp; personagem.position.z = THREE.MathUtils.clamp(</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; personagem.position.z,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -limiteCampo,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; limiteCampo</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; );</p>
+<p><br>&nbsp; &nbsp; &nbsp; &nbsp; // ==================================================<br>&nbsp; &nbsp; &nbsp; &nbsp; // CÂMERA QUE ACOMPANHA O PERSONAGEM<br>&nbsp; &nbsp; &nbsp; &nbsp; // ==================================================</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; // Definir onde a câmera deve ficar</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; const posicaoDesejada = new THREE.Vector3(</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; personagem.position.x,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; personagem.position.y + 6,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; personagem.position.z + 9</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; );</p>
+<p><br>&nbsp; &nbsp; &nbsp; &nbsp; // Movimento suave da câmera</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; camera.position.lerp(</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; posicaoDesejada,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1 - Math.exp(-4 * delta)</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; );</p>
+<p><br>&nbsp; &nbsp; &nbsp; &nbsp; // Definir o ponto que a câmera observa</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; alvoCamera.set(</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; personagem.position.x,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; personagem.position.y + 1,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; personagem.position.z</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; );</p>
+<p><br>&nbsp; &nbsp; &nbsp; &nbsp; camera.lookAt(alvoCamera);</p>
+<p>&nbsp; &nbsp; }</p>
+<p><br>&nbsp; &nbsp; // ==================================================<br>&nbsp; &nbsp; // DESENHAR A CENA<br>&nbsp; &nbsp; // ==================================================</p>
+<p>&nbsp; &nbsp; renderer.render(</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; cena,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; camera</p>
+<p>&nbsp; &nbsp; );</p>
+<p>}</p>
+<p><br>// Iniciar o jogo</p>
+<p>animar();</p>
+<p><br>// ==================================================<br>// 16. AJUSTAR A TELA QUANDO A JANELA MUDA DE TAMANHO<br>// ==================================================</p>
+<p>window.addEventListener('resize', function () {</p>
+<p>&nbsp; &nbsp; const largura = areaJogo.clientWidth;</p>
+<p>&nbsp; &nbsp; const altura = areaJogo.clientHeight;</p>
+<p><br>&nbsp; &nbsp; // Atualizar proporção da câmera</p>
+<p>&nbsp; &nbsp; camera.aspect = largura / altura;</p>
+<p>&nbsp; &nbsp; camera.updateProjectionMatrix();</p>
+<p><br>&nbsp; &nbsp; // Redimensionar o renderizador</p>
+<p>&nbsp; &nbsp; renderer.setSize(</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; largura,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; altura</p>
+<p>&nbsp; &nbsp; );</p>
+<p>});</p>
                 </div>
 
                 <div class="activity-box">
