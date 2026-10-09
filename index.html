@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roteiro de Estudo — Meu Primeiro Mundo 3D</title>
+    
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Three.js CDN para o Sandbox de demonstração -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --secondary: #06b6d4;
+            --accent: #f59e0b;
+            --bg-body: #0f172a;
+            --bg-card: #1e293b;
+            --bg-card-alt: #334155;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #475569;
+            --success: #10b981;
+            --code-bg: #090d16;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Top Header & Navigation */
+        header.top-bar {
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .brand i {
+            font-size: 1.8rem;
+            color: var(--secondary);
+        }
+
+        .brand h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .brand span {
+            font-size: 0.85rem;
+            color: var(--secondary);
+            background: rgba(6, 182, 212, 0.15);
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .progress-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: var(--bg-card-alt);
+            padding: 0.4rem 1rem;
+            border-radius: 30px;
+        }
+
+        .progress-bar-bg {
+            width: 120px;
+            height: 8px;
+            background: var(--bg-body);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .actions-btn {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card-alt);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+
+        /* Layout Main Structure */
+        .app-container {
+            display: flex;
+            flex: 1;
+        }
+
+        /* Sidebar Nav */
+        aside.sidebar {
+            width: 280px;
+            background: var(--bg-card);
+            border-right: 1px solid var(--border);
+            padding: 1.5rem 1rem;
+            height: calc(100vh - 65px);
+            position: sticky;
+            top: 65px;
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+
+        .sidebar h2 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            padding-left: 0.5rem;
+        }
+
+        .nav-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .nav-item a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.6rem 0.8rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .nav-item a:hover, .nav-item.active a {
+            background: var(--bg-card-alt);
+            color: var(--text-main);
+        }
+
+        .nav-item.completed a {
+            color: var(--success);
+        }
+
+        .nav-item .check-icon {
+            font-size: 0.8rem;
+            opacity: 0.3;
+        }
+
+        .nav-item.completed .check-icon {
+            opacity: 1;
+            color: var(--success);
+        }
+
+        /* Main Content */
+        main.content {
+            flex: 1;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-banner {
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.2), rgba(6, 182, 212, 0.2));
+            border: 1px solid var(--primary);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-banner h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--secondary);
+            font-weight: 500;
+        }
+
+        /* Interactive Demo 3D Container */
+        .demo-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .demo-section h2 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        #demo-canvas-container {
+            width: 100%;
+            height: 320px;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            background: #000;
+            margin-top: 1rem;
+        }
+
+        .demo-controls-overlay {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(5px);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: #fff;
+            pointer-events: none;
+        }
+
+        /* Step Cards */
+        .step-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            scroll-margin-top: 80px;
+        }
+
+        .step-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .step-title-group h2 {
+            font-size: 1.4rem;
+            color: var(--text-main);
+        }
+
+        .step-number {
+            font-size: 0.85rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .mark-completed-wrap {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            user-select: none;
+            background: var(--bg-card-alt);
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .mark-completed-wrap:hover {
+            background: var(--border);
+        }
+
+        .mark-completed-wrap input {
+            cursor: pointer;
+            accent-color: var(--success);
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            color: var(--secondary);
+            margin: 1.5rem 0 0.8rem 0;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #cbd5e1;
+        }
+
+        ul, ol {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            color: #cbd5e1;
+        }
+
+        li {
+            margin-bottom: 0.4rem;
+        }
+
+        /* Code Snippets */
+        .code-block {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            margin: 1rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .code-header {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.4rem 1rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .copy-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: color 0.2s;
+        }
+
+        .copy-btn:hover {
+            color: #fff;
+        }
+
+        pre {
+            padding: 1rem;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.88rem;
+            color: #e2e8f0;
+            line-height: 1.5;
+        }
+
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--bg-card-alt);
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        td {
+            background: rgba(15, 23, 42, 0.4);
+            color: #cbd5e1;
+        }
+
+        /* Interactive Activity / Notebook Box */
+        .activity-box {
+            background: rgba(79, 70, 229, 0.1);
+            border: 1px solid rgba(79, 70, 229, 0.3);
+            border-left: 4px solid var(--primary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .activity-box.challenge {
+            background: rgba(245, 158, 11, 0.1);
+            border-color: rgba(245, 158, 11, 0.3);
+            border-left-color: var(--accent);
+        }
+
+        .activity-title {
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .activity-title i {
+            color: var(--primary);
+        }
+
+        .challenge .activity-title i {
+            color: var(--accent);
+        }
+
+        textarea.notebook-input {
+            width: 100%;
+            min-height: 90px;
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: #fff;
+            padding: 0.75rem;
+            font-family: inherit;
+            font-size: 0.9rem;
+            resize: vertical;
+            margin-top: 0.5rem;
+            transition: border-color 0.2s;
+        }
+
+        textarea.notebook-input:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+
+        .save-indicator {
+            font-size: 0.75rem;
+            color: var(--success);
+            margin-top: 0.3rem;
+            display: none;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: auto;
+        }
+
+        /* Print / PDF Export Styling */
+        @media print {
+            header.top-bar, aside.sidebar, .demo-section, .actions-btn, .mark-completed-wrap {
+                display: none !important;
+            }
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            main.content {
+                max-width: 100% !important;
+                padding: 0 !important;
+            }
+            .step-card {
+                background: white !important;
+                border: 1px solid #ccc !important;
+                color: black !important;
+                break-inside: avoid;
+            }
+            p, ul, ol, th, td {
+                color: black !important;
+            }
+            textarea.notebook-input {
+                border: 1px solid #999 !important;
+                color: black !important;
+                background: white !important;
+            }
+        }
+
+        /* Responsividade */
+        @media (max-width: 900px) {
+            .app-container {
+                flex-direction: column;
+            }
+            aside.sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cabeçalho Principal -->
+    <header class="top-bar">
+        <div class="brand">
+            <i class="fa-solid fa-cube"></i>
+            <div>
+                <h1>Meu Primeiro Mundo 3D</h1>
+                <span>Teens I &bull; Robótica & Programação</span>
+            </div>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressFill"></div>
+            </div>
+            <span class="progress-text" id="progressText">0% Concluído</span>
+        </div>
+
+        <div class="actions-btn">
+            <button class="btn btn-secondary" onclick="exportNotebook()">
+                <i class="fa-solid fa-file-export"></i> Exportar Respostas
+            </button>
+            <button class="btn" onclick="window.print()">
+                <i class="fa-solid fa-print"></i> Imprimir / PDF
+            </button>
+        </div>
+    </header>
+
+    <div class="app-container">
+        <!-- Menu Lateral de Navegação -->
+        <aside class="sidebar">
+            <h2>Sumário do Roteiro</h2>
+            <ul class="nav-list" id="navList">
+                <li class="nav-item"><a href="#intro"><i class="fa-solid fa-flag check-icon"></i> Visão Geral</a></li>
+                <li class="nav-item"><a href="#etapa1"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 1: Ambiente</a></li>
+                <li class="nav-item"><a href="#etapa2"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 2: HTML</a></li>
+                <li class="nav-item"><a href="#etapa3"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 3: CSS</a></li>
+                <li class="nav-item"><a href="#etapa4"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 4: Cena 3D</a></li>
+                <li class="nav-item"><a href="#etapa5"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 5: Câmera</a></li>
+                <li class="nav-item"><a href="#etapa6"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 6: Iluminação</a></li>
+                <li class="nav-item"><a href="#etapa7"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 7: Campo Aberto</a></li>
+                <li class="nav-item"><a href="#etapa8"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 8: Árvores</a></li>
+                <li class="nav-item"><a href="#etapa9"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 9: Modelo .GLB</a></li>
+                <li class="nav-item"><a href="#etapa10"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 10: Movimentação</a></li>
+                <li class="nav-item"><a href="#etapa11"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 11: Rotação</a></li>
+                <li class="nav-item"><a href="#etapa12"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 12: Limites</a></li>
+                <li class="nav-item"><a href="#etapa13"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 13: Câmera Suave</a></li>
+                <li class="nav-item"><a href="#etapa14"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 14: Loop do Jogo</a></li>
+                <li class="nav-item"><a href="#etapa15"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 15: Testes</a></li>
+                <li class="nav-item"><a href="#etapa16"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 16: GitHub</a></li>
+                <li class="nav-item"><a href="#etapa17"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 17: Desafio Final</a></li>
+                <li class="nav-item"><a href="#etapa18"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 18: Reflexão</a></li>
+                <li class="nav-item"><a href="#etapa19"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 19: Avaliação</a></li>
+            </ul>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <main class="content">
+
+            <!-- Banner do Projeto -->
+            <section class="hero-banner" id="intro">
+                <h1>Roteiro de Estudo — Meu Primeiro Mundo 3D</h1>
+                <p>Tecnologia e Robótica | Teens I | Programação de Jogos 3D</p>
+                <div class="hero-meta">
+                    <span class="tag"><i class="fa-brands fa-html5"></i> HTML5</span>
+                    <span class="tag"><i class="fa-brands fa-css3-alt"></i> CSS3</span>
+                    <span class="tag"><i class="fa-brands fa-js"></i> JavaScript</span>
+                    <span class="tag"><i class="fa-solid fa-cubes"></i> Three.js</span>
+                    <span class="tag"><i class="fa-solid fa-code"></i> VS Code</span>
+                    <span class="tag"><i class="fa-brands fa-github"></i> GitHub</span>
+                </div>
+            </section>
+
+            <!-- Playground / Demo Interativo 3D -->
+            <section class="demo-section">
+                <h2><i class="fa-solid fa-gamepad" style="color: var(--secondary);"></i> Teste Interativo: Seu Mundo 3D Pré-visualizado</h2>
+                <p>Este é um exemplo funcionando em tempo real da cena que você construirá ao longo deste roteiro!</p>
+                <div id="demo-canvas-container">
+                    <div class="demo-controls-overlay">
+                        <i class="fa-solid fa-keyboard"></i> Use <strong>W, A, S, D</strong> ou <strong>Setas</strong> para andar pelo campo.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Apresentação & Objetivos -->
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-title-group">
+                        <span class="step-number">Introdução</span>
+                        <h2>Apresentação do Projeto</h2>
+                    </div>
+                </div>
+                <p>Você já imaginou criar seu próprio jogo 3D, com um personagem que pode explorar um campo aberto, árvores, pedras e um cenário construído por você?</p>
+                <p>Neste projeto, você aprenderá a desenvolver um ambiente 3D utilizando programação. Em vez de utilizar uma ferramenta visual pronta para criar jogos, você escreverá códigos que darão vida ao seu mundo virtual.</p>
+                <p>Você utilizará um modelo de personagem no formato <code>.glb</code>, aprenderá a posicioná-lo no cenário e programará seus movimentos usando o teclado.</p>
+
+                <h3>O que você aprenderá?</h3>
+                <ul>
+                    <li>Compreender a estrutura básica de um projeto Web.</li>
+                    <li>Identificar as funções dos arquivos HTML, CSS e JavaScript.</li>
+                    <li>Criar uma cena tridimensional com Three.js.</li>
+                    <li>Trabalhar com coordenadas X, Y e Z.</li>
+                    <li>Importar modelos 3D no formato .glb.</li>
+                    <li>Criar iluminação, chão e objetos decorativos.</li>
+                    <li>Programar a movimentação de um personagem.</li>
+                    <li>Utilizar o teclado para controlar objetos.</li>
+                    <li>Compreender como uma câmera acompanha o jogador.</li>
+                    <li>Organizar e publicar um projeto utilizando GitHub.</li>
+                </ul>
+
+                <h3>Como será o resultado?</h3>
+                <ol>
+                    <li>Visualizar um campo aberto em 3D.</li>
+                    <li>Controlar um personagem com o teclado.</li>
+                    <li>Caminhar em diferentes direções.</li>
+                    <li>Observar a câmera acompanhando o personagem.</li>
+                    <li>Explorar um cenário com árvores e pedras.</li>
+                </ol>
+            </div>
+
+            <!-- ETAPA 1 -->
+            <section class="step-card" id="etapa1">
+                <div class="step-header">
+                    <div class="step-title-group">
+                        <span class="step-number">Etapa 1</span>
+                        <h2>Preparando o ambiente de desenvolvimento</h2>
+                    </div>
+                    <label class="mark-completed-wrap">
+                        <input type="checkbox" class="step-checkbox" data-step="etapa1">
+                        Concluído
+                    </label>
+                </div>
+                <p>Antes de construir o jogo, precisamos organizar os arquivos e preparar o ambiente de trabalho.</p>
+
+                <h3>Passo 1.1 — Criar a pasta do projeto</h3>
+                <p>Abra o Visual Studio Code (VS Code). Crie uma pasta chamada <code>meu-mundo-3d</code>. Estrutura de arquivos:</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>Estrutura de Diretórios</span>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                    </div>
+                    <pre>meu-mundo-3d/
+│
+├── index.html
+├── style.css
+├── game.js
+│
+└── assets/
+    └── personagem.glb</pre>
+                </div>
+
+                <h3>Para que serve cada arquivo?</h3>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Arquivo / Pasta</th>
+                                <th>Função</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>index.html</code></td><td>Organiza os elementos da página e carrega o jogo.</td></tr>
+                            <tr><td><code>style.css</code></td><td>Define a aparência da página e da interface.</td></tr>
+                            <tr><td><code>game.js</code></td><td>Contém a programação do ambiente 3D e dos controles.</td></tr>
+                            <tr><td><code>personagem.glb</code></td><td>Armazena o modelo tridimensional do personagem.</td></tr>
+                            <tr><td><code>assets/</code></td><td>Guarda os modelos e outros recursos utilizados no jogo.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Atividade 1 -->
+                <div class="activity-box">
+                    <div class="activity-title"><i class="fa-solid fa-pen-to-square"></i> Atividade 1 — Organizando os arquivos</div>
+                    <p>1. Qual é a função do arquivo <code>index.html</code>?</p>
+                    <textarea class="notebook-input" id="q_e1_1" placeholder="Digite sua resposta aqui..."></textarea>
+                    
+                    <p style="margin-top:0.8rem;">2. Por que o código JavaScript ficará separado do HTML?</p>
+                    <textarea class="notebook-input" id="q_e1_2" placeholder="Digite sua resposta aqui..."></textarea>
+
+                    <p style="margin-top:0.8rem;">3. Para que serve a pasta <code>assets</code>?</p>
+                    <textarea class="notebook-input" id="q_e1_3" placeholder="Digite sua resposta aqui..."></textarea>
+
+                    <p style="margin-top:0.8rem;">4. O que poderia acontecer se o nome do arquivo no código fosse diferente do nome salvo na pasta?</p>
+                    <textarea class="notebook-input" id="q_e1_4" placeholder="Digite sua resposta aqui..."></textarea>
+                </div>
+
+                <div class="activity-box challenge">
+                    <div class="activity-title"><i class="fa-solid fa-trophy"></i> Desafio</div>
+                    <p>Crie toda a estrutura de pastas no VS Code antes de começar a programar.</p>
+                </div>
+            </section>
+
+            <!-- ETAPA 2 -->
+            <section class="step-card" id="etapa2">
+                <div class="step-header">
+                    <div class="step-title-group">
+                        <span class="step-number">Etapa 2</span>
+                        <h2>Construindo a interface do jogo com HTML</h2>
+                    </div>
+                    <label class="mark-completed-wrap">
+                        <input type="checkbox" class="step-checkbox" data-step="etapa2">
+                        Concluído
+                    </label>
+                </div>
+                <p>O HTML é responsável por organizar os elementos de uma página Web.</p>
+
+                <h3>Passo 2.1 — Criar o arquivo HTML</h3>
+                <p>Abra o arquivo <code>index.html</code> e insira a estrutura:</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>index.html</span>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                    </div>
+                    <pre>&lt;header id="interface"&gt;
+    &lt;div class="titulo"&gt;
+        &lt;h1&gt;Meu Primeiro Mundo 3D&lt;/h1&gt;
+        &lt;p&gt;Explore o campo e descubra o ambiente!&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div id="status"&gt;
+        Carregando mundo 3D...
+    &lt;/div&gt;
+&lt;/header&gt;
+
+&lt;main id="jogo"&gt;
+    &lt;div id="mensagem"&gt;
+        Preparando o mundo 3D...
+    &lt;/div&gt;
+&lt;/main&gt;</pre>
+                </div>
+
+                <h3>Passo 2.2 — Conectar o CSS e o JavaScript</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>Conexão de Arquivos</span>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                    </div>
+                    <pre>&lt;link rel="stylesheet" href="style.css"&gt;
+&lt;script type="module" src="game.js"&gt;&lt;/script&gt;</pre>
+                </div>
+
+                <div class="activity-box">
+                    <div class="activity-title"><i class="fa-solid fa-pen-to-square"></i> Atividade 2 — Explorando o HTML</div>
+                    <p>Altere o título e a mensagem apresentada ao jogador. Responda:</p>
+                    <p>Se você modificar o título no HTML, precisará alterar o arquivo JavaScript? Explique sua resposta.</p>
+                    <textarea class="notebook-input" id="q_e2_1" placeholder="Explique aqui..."></textarea>
+                </div>
+            </section>
+
+            <!-- ETAPA 3 -->
+            <section class="step-card" id="etapa3">
+                <div class="step-header">
+                    <div class="step-title-group">
+                        <span class="step-number">Etapa 3</span>
+                        <h2>Personalizando o jogo com CSS</h2>
+                    </div>
+                    <label class="mark-completed-wrap">
+                        <input type="checkbox" class="step-checkbox" data-step="etapa3">
+                        Concluído
+                    </label>
+                </div>
+                <p>O CSS permite modificar a aparência da página, incluindo cores, tamanhos, espaçamentos e posicionamento.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>style.css</span>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                    </div>
+                    <pre>body {
+    font-family: Arial, sans-serif;
+    background: #eaf2f8;
+    color: #263238;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#interface {
+    background: #1565c0;
+    color: white;
+}</pre>
+                </div>
+
+                <div class="activity-box">
+                    <div class="activity-title"><i class="fa-solid fa-paint-brush"></i> Atividade 3 — Personalize a interface</div>
+                    <p>Descreva as cores e a identidade visual que você escolheu para seu mundo 3D:</p>
+                    <textarea class="notebook-input" id="q_e3_1" placeholder="Descreva sua identidade visual (ex: Tema Espacial, Floresta Dark...)"></textarea>
+                </div>
+            </section>
+
+            <!-- ETAPA 4 -->
+            <section class="step-card" id="etapa4">
+                <div class="step-header">
+                    <div class="step-title-group">
+                        <span class="step-number">Etapa 4</span>
+                        <h2>Criando a primeira cena 3D com Three.js</h2>
+                    </div>
+                    <label class="mark-completed-wrap">
+                        <input type="checkbox" class="step-checkbox" data-step="etapa4">
+                        Concluído
+                    </label>
+                </div>
+                <p>Três elementos fundamentais são necessários para uma cena 3D:</p>
+                <ol>
+                    <li><strong>Cena:</strong> o espaço onde os objetos ficam.</li>
+                    <li><strong>Câmera:</strong> de onde o jogador observa o mundo.</li>
+                    <li><strong>Renderizador:</strong> desenha as imagens na tela.</li>
+                </ol>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>game.js</span>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                    </div>
+                    <pre>import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+const cena = new THREE.Scene();
+cena.background = new THREE.Color(0x87ceeb); // Azul claro do céu</pre>
+                </div>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr><th>Cor do Céu</th><th>Código Hexadecimal</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Azul-claro</td><td><code>0x87ceeb</code></td></tr>
+                            <tr><td>Azul-escuro</td><td><code>0x1a237e</code></td></tr>
+                            <tr><td>Laranja (Pôr do sol)</td><td><code>0xff9800</code></td></tr>
+                            <tr><td>Cinza (Nublado)</td><td><code>0x808080</code></td></tr>
+                            <tr><td>Preto (Espaço)</td><td><code>0x000000</code></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="activity-box">
+                    <div class="activity-title"><i class="fa-solid fa-pen-to-square"></i> Atividade 4 — Modificando o céu</div>
+                    <p>Qual cor hexadecimal você escolheu para o seu céu e por quê?</p>
+                    <textarea class="notebook-input" id="q_e4_1" placeholder="Digite sua escolha..."></textarea>
+                </div>
+            </section>
+
+            <!-- ETAPA 5 -->
+            <section class="step-card" id="etapa5">
+                <div class="step-header">
+                    <div class="step-title-group">
+                        <span class="step-number">Etapa 5</span>
+                        <h2>Configurando a câmera e o renderizador</h2>
+                    </div>
+                    <label class="mark-completed-wrap">
+                        <input type="checkbox" class="step-checkbox" data-step="etapa5">
+                        Concluído
+                    </label>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>game.js</span>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                    </div>
+                    <pre>const camera = new THREE.PerspectiveCamera(
+    60, // Campo de visão (FOV)
+    areaJogo.clientWidth / areaJogo.clientHeight, // Proporção
+    0.1, // Distância mínima
+    200  // Distância máxima
+);
+
+camera.position.set(0, 7, 10); // Posição inicial X, Y, Z
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(areaJogo.clientWidth, areaJogo.clientHeight);
+areaJogo.appendChild(renderer.domElement);</pre>
+                </div>
+
+                <div class="activity-box">
+                    <div class="activity-title"><i class="fa-solid fa-pen-to-square"></i> Atividade 5 — Investigando a câmera</div>
+                    <p>1. O que acontece quando aumentamos o valor de Y da câmera?</p>
+                    <textarea class="notebook-input" id="q_e5_1" placeholder="Resposta..."></textarea>
+
+                    <p style="margin-top:0.8rem;">2. O que acontece quando aumentamos o valor de Z?</p>
+                    <textarea class="notebook-input" id="q_e5_2" placeholder="Resposta..."></textarea>
+                </div>
+            </section>
+
+            <!-- ETAPA 6 -->
+            <section class="step-card" id="etapa6">
+                <div class="step-header">
+                    <div class="step-title-group">
+                        <span class="step-number">Etapa 6</span>
+                        <h2>Adicionando iluminação</h2>
+                    </div>
+                    <label class="mark-completed-wrap">
+                        <input type="checkbox" class="step-checkbox" data-step="etapa6">
+                        Concluído
+                    </label>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>game.js</span>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                    </div>
+                    <pre>// Luz do Céu e Solo
+const luzAmbiente = new THREE.HemisphereLight(0xffffff, 0x567d46, 2);
+cena.add(luzAmbiente);
+
+// Luz do Sol (Projeta Sombras)
+const sol = new THREE.DirectionalLight(0xffffff, 3);
+sol.position.set(15, 25, 10);
+sol.castShadow = true;
+cena.add(sol);</pre>
+                </div>
+
+                <div class="activity-box">
+                    <div class="activity-title"><i class="fa-solid fa-pen-to-square"></i> Atividade 6 — Modificando a iluminação</div>
+                    <p>Como a alteração da posição da luz direcional altera a atmosfera do seu jogo?</p>
+                    <textarea class="notebook-input" id="q_e6_1" placeholder="Sua observação..."></textarea>
+                </div>
+            </section>
+
+            <!-- ETAPA 7 -->
+            <section class="step-card" id="etapa7">
+                <div class="step-header">
+                    <div class="step-title-group">
+                        <span class="step-number">Etapa 7</span>
+                        <h2>Construindo o campo aberto</h2>
+                    </div>
+                    <label class="mark-completed-wrap">
+                        <input type="checkbox" class="step-checkbox" data-step="etapa7">
+                        Concluído
+                    </label>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>game.js</span>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                    </div>
+                    <pre>const geometriaChao = new THREE.PlaneGeometry(100, 100);
+const materialChao = new THREE.MeshStandardMaterial({
+    color: 0x4caf50, // Verde grama
+    roughness: 1
+});
+
+const chao = new THREE.Mesh(geometriaChao, materialChao);
+chao.rotation.x = -Math.PI / 2; // Gira o plano para ficar na horizontal
+chao.receiveShadow = true;
+cena.add(chao);</pre>
+                </div>
+
+                <div class="activity-box challenge">
+                    <div class="activity-title"><i class="fa-solid fa-trophy"></i> Desafio do Terreno</div>
+                    <p>Transforme seu campo em neve, deserto ou solo lunar alterando a propriedade <code>color</code>.</p>
+                </div>
+            </section>
+
+            <!-- ETAPA 8 -->
+            <section class="step-card" id="etapa8">
+                <div class="step-header">
+                    <div class="step-title-group">
+                        <span class="step-number">Etapa 8</span>
+                        <h2>Criando árvores e pedras com funções</h2>
+                    </div>
+                    <label class="mark-completed-wrap">
+                        <input type="checkbox" class="step-checkbox" data-step="etapa8">
+                        Concluído
+                    </label>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>game.js</span>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                    </div>
+                    <pre>function criarArvore(x, z) {
+    // Tronco
+    const geoTronco = new THREE.CylinderGeometry(0.2, 0.3, 1.5, 8);
+    const matTronco = new THREE.MeshStandardMaterial({ color: 0x8b5a2b });
+    const tronco = new THREE.Mesh(geoTronco, matTronco);
+    tronco.position.set(x, 0.75, z);
+    cena.add(tronco);
+
+    // Copa da árvore
+    const geoCopa = new THREE.ConeGeometry(1.2, 2.5, 8);
+    const matCopa = new THREE.MeshStandardMaterial({ color: 0x2e7d32 });
+    const copa = new THREE.Mesh(geoCopa, matCopa);
+    copa.position.set(x, 2.5, z);
+    cena.add(copa);
+}
+
+// Chamar a função em posições diferentes
+criarArvore(10, 15);
+criarArvore(-10, 15);
+criarArvore(5, -10);</pre>
+                </div>
+
+                <div class="activity-box">
+                    <div class="activity-title"><i class="fa-solid fa-pen-to-square"></i> Atividade 8 — Criando uma floresta</div>
+                    <p>Por que o uso de funções facilita a criação de vários objetos idênticos pelo cenário?</p>
+                    <textarea class="notebook-input" id="q_e8_1" placeholder="Sua resposta..."></textarea>
+                </div>
+            </section>
+
+            <!-- ETAPA 9 -->
+            <section class="step-card" id="etapa9">
+                <div class="step-header">
+                    <div class="step-title-group">
+                        <span class="step-number">Etapa 9</span>
+                        <h2>Importando um personagem 3D com GLB</h2>
+                    </div>
+                    <label class="mark-completed-wrap">
+                        <input type="checkbox" class="step-checkbox" data-step="etapa9">
+                        Concluído
+                    </label>
+                </div>
+
+                <p>Fontes de modelos 3D gratuitos: <strong>Sketchfab</strong>, <strong>Poly Pizza</strong> e <strong>Khronos Sample Assets</strong>.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>game.js</span>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                    </div>
+                    <pre>const carregador = new GLTFLoader();
+
+carregador.load('./assets/personagem.glb', function (gltf) {
+    const modelo = gltf.scene;
+    
+    // Ajustar escala automaticamente com Box3
+    const caixaInicial = new THREE.Box3().setFromObject(modelo);
+    const tamanho = new THREE.Vector3();
+    caixaInicial.getSize(tamanho);
+
+    personagem.add(modelo);
+});</pre>
+                </div>
+
+                <div class="activity-box">
+                    <div class="activity-title"><i class="fa-solid fa-pen-to-square"></i> Atividade 9 — Testando seu modelo</div>
+                    <p>O personagem apareceu na altura correta em relação ao chão? Precisou ajustar a escala?</p>
+                    <textarea class="notebook-input" id="q_e9_1" placeholder="Escreva suas observações..."></textarea>
+                </div>
+            </section>
+
+            <!-- ETAPA 10 -->
+            <section class="step-card" id="etapa10">
+                <div class="step-header">
+                    <div class="step-title-group">
+                        <span class="step-number">Etapa 10</span>
+                        <h2>Programando a movimentação do personagem</h2>
+                    </div>
+                    <label class="mark-completed-wrap">
+                        <input type="checkbox" class="step-checkbox" data-step="etapa10">
+                        Concluído
+                    </label>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>game.js</span>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                    </div>
+                    <pre>const teclas = {};
+
+window.addEventListener('keydown', (e) => teclas[e.key.toLowerCase()] = true);
+window.addEventListener('keyup', (e) => teclas[e.key.toLowerCase()] = false);
+
+// No loop principal do jogo:
+if (teclas['w'] || teclas['arrowup']) direcao.z -= 1;
+if (teclas['s'] || teclas['arrowdown']) direcao.z += 1;
+if (teclas['a'] || teclas['arrowleft']) direcao.x -= 1;
+if (teclas['d'] || teclas['arrowright']) direcao.x += 1;
+
+direcao.normalize(); // Evita velocidade maior na diagonal
+
+personagem.position.x += direcao.x * velocidade * delta;
+personagem.position.z += direcao.z * velocidade * delta;</pre>
+                </div>
+
+                <div class="activity-box">
+                    <div class="activity-title"><i class="fa-solid fa-pen-to-square"></i> Atividade 10 — Teste de Velocidade</div>
+                    <p>Qual valor de velocidade ficou ideal para o seu cenário e por quê?</p>
+                    <textarea class="notebook-input" id="q_e10_1" placeholder="Sua resposta..."></textarea>
+                </div>
+            </section>
+
+            <!-- ETAPA 11 -->
+            <section class="step-card" id="etapa11">
+                <div class="step-header">
+                    <div class="step-title-group">
+                        <span class="step-number">Etapa 11</span>
+                        <h2>Fazendo o personagem olhar na direção do movimento</h2>
+                    </div>
+                    <label class="mark-completed-wrap">
+                        <input type="checkbox" class="step-checkbox" data-step="etapa11">
+                        Concluído
+                    </label>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>game.js</span>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                    </div>
+                    <pre>if (direcao.length() > 0) {
+    personagem.rotation.y = Math.atan2(direcao.x, direcao.z);
+}</pre>
+                </div>
+            </section>
+
+            <!-- ETAPA 12 -->
+            <section class="step-card" id="etapa12">
+                <div class="step-header">
+                    <div class="step-title-group">
+                        <span class="step-number">Etapa 12</span>
+                        <h2>Impedindo que o personagem saia do campo</h2>
+                    </div>
+                    <label class="mark-completed-wrap">
+                        <input type="checkbox" class="step-checkbox" data-step="etapa12">
+                        Concluído
+                    </label>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>game.js</span>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                    </div>
+                    <pre>const limiteCampo = 30;
+
+personagem.position.x = THREE.MathUtils.clamp(personagem.position.x, -limiteCampo, limiteCampo);
+personagem.position.z = THREE.MathUtils.clamp(personagem.position.z, -limiteCampo, limiteCampo);</pre>
+                </div>
+            </section>
+
+            <!-- ETAPA 13 -->
+            <section class="step-card" id="etapa13">
+                <div class="step-header">
+                    <div class="step-title-group">
+                        <span class="step-number">Etapa 13</span>
+                        <h2>Câmera suave seguindo o jogador</h2>
+                    </div>
+                    <label class="mark-completed-wrap">
+                        <input type="checkbox" class="step-checkbox" data-step="etapa13">
+                        Concluído
+                    </label>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>game.js</span>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                    </div>
+                    <pre>const posicaoDesejada = new THREE.Vector3(
+    personagem.position.x,
+    personagem.position.y + 6,
+    personagem.position.z + 9
+);
+
+// Interpolação suave (Lerp)
+camera.position.lerp(posicaoDesejada, 1 - Math.exp(-4 * delta));
+camera.lookAt(personagem.position);</pre>
+                </div>
+            </section>
+
+            <!-- ETAPA 14 -->
+            <section class="step-card" id="etapa14">
+                <div class="step-header">
+                    <div class="step-title-group">
+                        <span class="step-number">Etapa 14</span>
+                        <h2>Compreendendo o Loop do Jogo</h2>
+                    </div>
+                    <label class="mark-completed-wrap">
+                        <input type="checkbox" class="step-checkbox" data-step="etapa14">
+                        Concluído
+                    </label>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>game.js</span>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                    </div>
+                    <pre>function animar() {
+    requestAnimationFrame(animar);
+
+    const delta = Math.min(relogio.getDelta(), 0.05);
+
+    // Atualiza lógica, posições e controles aqui
+    
+    renderer.render(cena, camera);
+}
+
+animar(); // Inicia o loop</pre>
+                </div>
+
+                <div class="activity-box">
+                    <div class="activity-title"><i class="fa-solid fa-pen-to-square"></i> Atividade 14 — Reflexão</div>
+                    <p>Qual é a função do método <code>requestAnimationFrame()</code> no loop do jogo?</p>
+                    <textarea class="notebook-input" id="q_e14_1" placeholder="Sua resposta..."></textarea>
+                </div>
+            </section>
+
+            <!-- ETAPA 15 -->
+            <section class="step-card" id="etapa15">
+                <div class="step-header">
+                    <div class="step-title-group">
+                        <span class="step-number">Etapa 15</span>
+                        <h2>Executando e Testando Localmente</h2>
+                    </div>
+                    <label class="mark-completed-wrap">
+                        <input type="checkbox" class="step-checkbox" data-step="etapa15">
+                        Concluído
+                    </label>
+                </div>
+
+                <p>Inicie o servidor HTTP local pelo terminal do VS Code:</p>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>Terminal</span>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                    </div>
+                    <pre>python3 -m http.server 8000</pre>
+                </div>
+                <p>Em seguida, acesse no navegador: <code>http://localhost:8000</code></p>
+            </section>
+
+            <!-- ETAPA 16 -->
+            <section class="step-card" id="etapa16">
+                <div class="step-header">
+                    <div class="step-title-group">
+                        <span class="step-number">Etapa 16</span>
+                        <h2>Publicando e Versionando no GitHub</h2>
+                    </div>
+                    <label class="mark-completed-wrap">
+                        <input type="checkbox" class="step-checkbox" data-step="etapa16">
+                        Concluído
+                    </label>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>Terminal Git</span>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                    </div>
+                    <pre>git init
+git add .
+git commit -m "Criar primeiro mundo 3D"
+git branch -M main
+git remote add origin URL_DO_SEU_REPOSITORIO
+git push -u origin main</pre>
+                </div>
+            </section>
+
+            <!-- ETAPA 17 -->
+            <section class="step-card" id="etapa17">
+                <div class="step-header">
+                    <div class="step-title-group">
+                        <span class="step-number">Etapa 17</span>
+                        <h2>Desafio Final: Personalize seu Mundo 3D</h2>
+                    </div>
+                    <label class="mark-completed-wrap">
+                        <input type="checkbox" class="step-checkbox" data-step="etapa17">
+                        Concluído
+                    </label>
+                </div>
+
+                <p>Escolha um tema para o seu projeto:</p>
+                <ul>
+                    <li>Ilha de exploração</li>
+                    <li>Campo medieval</li>
+                    <li>Planeta alienígena</li>
+                    <li>Floresta encantada</li>
+                    <li>Parque futurista</li>
+                </ul>
+
+                <div class="activity-box challenge">
+                    <div class="activity-title"><i class="fa-solid fa-star"></i> Desafios Extras Escolhidos</div>
+                    <textarea class="notebook-input" id="q_e17_1" placeholder="Descreva quais desafios extras (A, B, C, D, E, F ou G) você escolheu implementar..."></textarea>
+                </div>
+            </section>
+
+            <!-- ETAPA 18 -->
+            <section class="step-card" id="etapa18">
+                <div class="step-header">
+                    <div class="step-title-group">
+                        <span class="step-number">Etapa 18</span>
+                        <h2>Registro de Aprendizagem & Reflexão Final</h2>
+                    </div>
+                    <label class="mark-completed-wrap">
+                        <input type="checkbox" class="step-checkbox" data-step="etapa18">
+                        Concluído
+                    </label>
+                </div>
+
+                <div class="activity-box">
+                    <div class="activity-title"><i class="fa-solid fa-graduation-cap"></i> Registro de Aprendizagem</div>
+                    
+                    <p>1. Qual foi a parte mais fácil do projeto?</p>
+                    <textarea class="notebook-input" id="q_e18_1" placeholder="Sua resposta..."></textarea>
+
+                    <p style="margin-top:0.8rem;">2. Qual foi a maior dificuldade encontrada e como você a resolveu?</p>
+                    <textarea class="notebook-input" id="q_e18_2" placeholder="Sua resposta..."></textarea>
+
+                    <p style="margin-top:0.8rem;">3. Qual é a diferença entre HTML, CSS e JavaScript neste projeto?</p>
+                    <textarea class="notebook-input" id="q_e18_3" placeholder="Sua resposta..."></textarea>
+
+                    <p style="margin-top:0.8rem;">4. Qual é a função do Three.js?</p>
+                    <textarea class="notebook-input" id="q_e18_4" placeholder="Sua resposta..."></textarea>
+                </div>
+            </section>
+
+            <!-- ETAPA 19 -->
+            <section class="step-card" id="etapa19">
+                <div class="step-header">
+                    <div class="step-title-group">
+                        <span class="step-number">Etapa 19</span>
+                        <h2>Rubrica de Avaliação do Projeto</h2>
+                    </div>
+                    <label class="mark-completed-wrap">
+                        <input type="checkbox" class="step-checkbox" data-step="etapa19">
+                        Concluído
+                    </label>
+                </div>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Critério</th>
+                                <th>Iniciante</th>
+                                <th>Básico</th>
+                                <th>Intermediário</th>
+                                <th>Avançado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Organização</strong></td>
+                                <td>Arquivos desorganizados.</td>
+                                <td>Organiza parte dos arquivos.</td>
+                                <td>Mantém estrutura organizada.</td>
+                                <td>Organização impecável.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Modelo GLB</strong></td>
+                                <td>Não conseguiu importar.</td>
+                                <td>Importa com ajuda.</td>
+                                <td>Importa e ajusta escala.</td>
+                                <td>Ajusta e resolve problemas avançados.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Movimentação</strong></td>
+                                <td>Com dificuldades.</td>
+                                <td>Controles parciais.</td>
+                                <td>Controles funcionando perfeitamente.</td>
+                                <td>Compreende e customiza a física.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Cenário 3D</strong></td>
+                                <td>Poucos elementos.</td>
+                                <td>Campo e alguns objetos.</td>
+                                <td>Cenário rico e funcional.</td>
+                                <td>Ambiente altamente original.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>Desenvolvido para aulas de Tecnologia, Robótica e Programação de Jogos 3D &bull; Teens I</p>
+    </footer>
+
+    <!-- Scripts de Interatividade da Página e Sandbox Three.js -->
+    <script>
+        // --- 1. SCRIPT DO DEMO 3D INTERATIVO (SANDBOX) ---
+        (function initDemo3D() {
+            const container = document.getElementById('demo-canvas-container');
+            if(!container) return;
+
+            const scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x87ceeb);
+
+            const camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 100);
+            camera.position.set(0, 8, 12);
+
+            const renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            container.appendChild(renderer.domElement);
+
+            // Luzes
+            const light = new THREE.HemisphereLight(0xffffff, 0x444444, 1.2);
+            scene.add(light);
+            const dirLight = new THREE.DirectionalLight(0xffffff, 1.5);
+            dirLight.position.set(10, 20, 10);
+            scene.add(dirLight);
+
+            // Chão
+            const floorGeo = new THREE.PlaneGeometry(60, 60);
+            const floorMat = new THREE.MeshStandardMaterial({ color: 0x4caf50 });
+            const floor = new THREE.Mesh(floorGeo, floorMat);
+            floor.rotation.x = -Math.PI / 2;
+            scene.add(floor);
+
+            // Árvores simples
+            function addTree(x, z) {
+                const trunkGeo = new THREE.CylinderGeometry(0.2, 0.3, 1.2, 8);
+                const trunkMat = new THREE.MeshStandardMaterial({ color: 0x8b5a2b });
+                const trunk = new THREE.Mesh(trunkGeo, trunkMat);
+                trunk.position.set(x, 0.6, z);
+
+                const leavesGeo = new THREE.ConeGeometry(1, 2, 8);
+                const leavesMat = new THREE.MeshStandardMaterial({ color: 0x2e7d32 });
+                const leaves = new THREE.Mesh(leavesGeo, leavesMat);
+                leaves.position.set(x, 2, z);
+
+                scene.add(trunk);
+                scene.add(leaves);
+            }
+
+            addTree(5, -5);
+            addTree(-8, -10);
+            addTree(12, 8);
+            addTree(-10, 6);
+
+            // Personagem (Cubo Representativo)
+            const playerGeo = new THREE.BoxGeometry(1, 1.5, 1);
+            const playerMat = new THREE.MeshStandardMaterial({ color: 0x4f46e5 });
+            const player = new THREE.Mesh(playerGeo, playerMat);
+            player.position.y = 0.75;
+            scene.add(player);
+
+            // Controles
+            const keys = {};
+            window.addEventListener('keydown', (e) => keys[e.key.toLowerCase()] = true);
+            window.addEventListener('keyup', (e) => keys[e.key.toLowerCase()] = false);
+
+            const clock = new THREE.Clock();
+
+            function animate() {
+                requestAnimationFrame(animate);
+                const delta = clock.getDelta();
+                const speed = 7;
+
+                let moveX = 0;
+                let moveZ = 0;
+
+                if (keys['w'] || keys['arrowup']) moveZ -= 1;
+                if (keys['s'] || keys['arrowdown']) moveZ += 1;
+                if (keys['a'] || keys['arrowleft']) moveX -= 1;
+                if (keys['d'] || keys['arrowright']) moveX += 1;
+
+                if (moveX !== 0 || moveZ !== 0) {
+                    const len = Math.sqrt(moveX * moveX + moveZ * moveZ);
+                    moveX /= len;
+                    moveZ /= len;
+
+                    player.position.x += moveX * speed * delta;
+                    player.position.z += moveZ * speed * delta;
+
+                    // Limites
+                    player.position.x = Math.max(-25, Math.min(25, player.position.x));
+                    player.position.z = Math.max(-25, Math.min(25, player.position.z));
+
+                    player.rotation.y = Math.atan2(moveX, moveZ);
+                }
+
+                // Câmera Suave
+                camera.position.x = player.position.x;
+                camera.position.z = player.position.z + 10;
+                camera.lookAt(player.position);
+
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            window.addEventListener('resize', () => {
+                if(!container) return;
+                camera.aspect = container.clientWidth / container.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(container.clientWidth, container.clientHeight);
+            });
+        })();
+
+        // --- 2. SALVAMENTO AUTOMÁTICO DAS RESPOSTAS (LOCALSTORAGE) ---
+        document.querySelectorAll('.notebook-input').forEach(textarea => {
+            const savedValue = localStorage.getItem(textarea.id);
+            if (savedValue) textarea.value = savedValue;
+
+            textarea.addEventListener('input', () => {
+                localStorage.setItem(textarea.id, textarea.value);
+            });
+        });
+
+        // --- 3. CONTROLE DE PROGRESSO E CHECKBOXES ---
+        const checkboxes = document.querySelectorAll('.step-checkbox');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+
+        function updateProgress() {
+            let total = checkboxes.length;
+            let checked = 0;
+
+            checkboxes.forEach(cb => {
+                const isChecked = localStorage.getItem('cb_' + cb.dataset.step) === 'true';
+                cb.checked = isChecked;
+
+                const navItem = document.querySelector(`.nav-item a[href="#${cb.dataset.step}"]`)?.parentElement;
+                if (isChecked) {
+                    checked++;
+                    if(navItem) navItem.classList.add('completed');
+                } else {
+                    if(navItem) navItem.classList.remove('completed');
+                }
+            });
+
+            const percent = Math.round((checked / total) * 100);
+            progressFill.style.width = percent + '%';
+            progressText.innerText = percent + '% Concluído';
+        }
+
+        checkboxes.forEach(cb => {
+            cb.addEventListener('change', () => {
+                localStorage.setItem('cb_' + cb.dataset.step, cb.checked);
+                updateProgress();
+            });
+        });
+
+        updateProgress();
+
+        // --- 4. COPIAR CÓDIGO ---
+        function copyCode(btn) {
+            const code = btn.parentElement.nextElementSibling.innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> Copiado!';
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copiar';
+                }, 2000);
+            });
+        }
+
+        // --- 5. EXPORTAR CADERNO DE RESPOSTAS EM TXT ---
+        function exportNotebook() {
+            let content = "=== CADERNO DE RESPOSTAS — MEU PRIMEIRO MUNDO 3D ===\n\n";
+            document.querySelectorAll('.step-card').forEach(card => {
+                const title = card.querySelector('h2')?.innerText;
+                if (title) content += `\n--- ${title} ---\n`;
+
+                card.querySelectorAll('.notebook-input').forEach(input => {
+                    const question = input.previousElementSibling?.innerText || "Resposta:";
+                    content += `\n[Pergunta/Atividade]: ${question}\n[Sua Resposta]:\n${input.value || "(Não respondido)"}\n`;
+                });
+            });
+
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'meu_caderno_de_respostas_3d.txt';
+            link.click();
+        }
+    </script>
+</body>
+</html>
