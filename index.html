@@ -693,12 +693,12 @@
                 <p>Antes de construir o jogo, precisamos organizar os arquivos e preparar o ambiente de trabalho.</p>
 
                 <h3>Passo 1.1 — Criar a pasta do projeto</h3>
-                <p>Abra o Visual Studio Code (VS Code). Crie uma pasta conforme o nome de seu projeto <code>"nome do projeto"</code>. Estrutura de arquivos:</p>
+                <p>Abra o Visual Studio Code (VS Code). Com botão direito do mouse vão <code>New File</code> e crie <b>index.html, style.css, game.js</b> após isso vão em <code> New Folder</code> e crie a pasta assets, após isso faça o dowload do <b>personagem.glb</b> e arraste para assets. <br> Estrutura de arquivos:</p>
 
                 <div class="code-block">
                     <div class="code-header">
                         <span>Estrutura de Diretórios</span>
-                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                        
                     </div>
                     <pre>meu-mundo-3d/
 │
@@ -765,13 +765,31 @@
                 </div>
                 <p>O HTML é responsável por organizar os elementos de uma página Web.</p>
 
-                <h3>Passo 2.1 — Criar o arquivo HTML</h3>
-                <p>Abra o arquivo <code>index.html</code> Conecte o CSS</p>
+                <h3>Passo 2.0 — No arquivo HTML</h3>
+                <p>Abra o arquivo <code>index.html</code> cole o código padrão abaixo: </p>
 
                 <div class="code-block">
                     <div class="code-header">
                         <span>index.html</span>
-                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                         
+                    </div>
+                    <pre>&lt;link rel="stylesheet" href="style.css"&gt;<p>&lt;!DOCTYPE html&gt;<br>&lt;html lang="pt-BR"&gt;</p>
+<p>&lt;head&gt;<br>&nbsp; &nbsp; &lt;meta charset="UTF-8"&gt;</p>
+<p>&nbsp; &nbsp; &lt;meta<br>&nbsp; &nbsp; &nbsp; &nbsp; name="viewport"<br>&nbsp; &nbsp; &nbsp; &nbsp; content="width=device-width, initial-scale=1.0"<br>&nbsp; &nbsp; &gt;</p>
+<p>&nbsp; &nbsp; &lt;title&gt;Meu Primeiro Mundo 3D&lt;/title&gt;</p>
+<p>&lt;/head&gt;</p>
+<p>&lt;body&gt;</p>
+<p>&lt;/body&gt;</p>
+<pre>&lt;/html&gt;</pre></pre>
+                </div>
+
+                <h3>Passo 2.1 — Conecte o CSS</h3>
+                <p>Abra o arquivo <code>index.html</code> </p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>head do index.html</span>
+                         
                     </div>
                     <pre>&lt;link rel="stylesheet" href="style.css"&gt;</pre>
                 </div>
@@ -779,17 +797,17 @@
                 <h3>Passo 2.2 — Configuração dos módulos do Three.js</h3>
                 <div class="code-block">
                     <div class="code-header">
-                        <span>index.html</span>
-                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                        <span>head do index.html</span>
+                         
                     </div>
-                    <pre>&nbsp; &nbsp;<br>&nbsp; &nbsp; &lt;script type="importmap"&gt;<br>&nbsp; &nbsp; &nbsp; &nbsp; {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "imports": {<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &nbsp; &nbsp; }<br>&nbsp; &nbsp; &lt;/script&gt;</pre>
+                    <pre> &nbsp;<br>&lt;script type="importmap"&gt;<br> &nbsp; &nbsp; {<br> &nbsp; &nbsp; &nbsp; &nbsp; "imports": {<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"<br> &nbsp; &nbsp; &nbsp; &nbsp; }<br> &nbsp; &nbsp; }<br>&lt;/script&gt;</pre>
                 </div>
 
                 <h3>Passo 2.3 — Interface do jogo</h3>
                 <div class="code-block">
                     <div class="code-header">
-                        <span>index.html</span>
-                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                        <span>body do index.html</span>
+                         
                     </div>
                     <p>&nbsp; &nbsp; &lt;header id="interface"&gt;</p>
 <p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;div class="titulo"&gt;</p>
@@ -803,8 +821,8 @@
                 <h3>Passo 2.4 — Área onde o jogo será renderizado</h3>
                 <div class="code-block">
                     <div class="code-header">
-                        <span>index.html</span>
-                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                        <span>body do index.html</span>
+                         
                     </div>
                     <p>&nbsp; &nbsp; &lt;main id="jogo"&gt;</p>
 <p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;div id="mensagem"&gt;<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Preparando o mundo 3D...<br>&nbsp; &nbsp; &nbsp; &nbsp; &lt;/div&gt;</p>
@@ -814,8 +832,8 @@
                 <h3>Passo 2.5 — Controles</h3>
                 <div class="code-block">
                     <div class="code-header">
-                        <span>index.html</span>
-                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                        <span>body do index.html</span>
+                         
                     </div>
                     <p><br>&nbsp; &nbsp; &lt;footer id="controles"&gt;</p>
 <p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;div class="controle"&gt;</p>
@@ -836,8 +854,8 @@
                 <h3>Passo 2.6 — Conectar o CSS e o JavaScript</h3>
                 <div class="code-block">
                     <div class="code-header">
-                        <span>index.html</span>
-                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                        <span>body do index.html</span>
+                         
                     </div>
                     <pre>&lt;script type="module" src="game.js"&gt;&lt;/script&gt;</pre>
                 </div>
@@ -864,25 +882,94 @@
                 </div>
                 <p>O CSS permite modificar a aparência da página, incluindo cores, tamanhos, espaçamentos e posicionamento.</p>
 
+                <h3>Passo 3.0 — Código Inicial</h3>
                 <div class="code-block">
                     <div class="code-header">
-                        <span>style.css</span>
-                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                        <span> style.css</span>
+                         
                     </div>
-                    <pre>body {
-    font-family: Arial, sans-serif;
-    background: #eaf2f8;
-    color: #263238;
-    overflow: hidden;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
+                    <pre> <p>/* CONFIGURAÇÕES GERAIS */</p>
+<p>* {<br>&nbsp; &nbsp; margin: 0;<br>&nbsp; &nbsp; padding: 0;<br>&nbsp; &nbsp; box-sizing: border-box;<br>}</p>
+<p>.titulo h1 {<br>&nbsp; &nbsp; font-size: 22px;</p>
+<p>&nbsp; &nbsp; margin-bottom: 4px;<br>}</p>
+<p>.titulo p {<br>&nbsp; &nbsp; font-size: 13px;</p>
+<p>&nbsp; &nbsp; color: #cfd8dc;<br>}</p>
+<p><br>/* STATUS DO JOGO */</p>
+<p>#status {<br>&nbsp; &nbsp; font-size: 13px;</p>
+<p>&nbsp; &nbsp; padding: 10px 14px;</p>
+<p>&nbsp; &nbsp; background: #37474f;</p>
+<p>&nbsp; &nbsp; border-radius: 8px;</p>
+<p>&nbsp; &nbsp; text-align: center;<br>}</p>
+<p><br>/* ÁREA 3D */</p>
+<p>#jogo {<br>&nbsp; &nbsp; position: relative;</p>
+<p>&nbsp; &nbsp; flex: 1;</p>
+<p>&nbsp; &nbsp; min-height: 0;</p>
+<p>&nbsp; &nbsp; overflow: hidden;</p>
+<p>&nbsp; &nbsp; background: #87ceeb;<br>}</p>
+<p>#jogo canvas {<br>&nbsp; &nbsp; display: block;</p>
+<p>&nbsp; &nbsp; width: 100%;</p>
+<p>&nbsp; &nbsp; height: 100%;<br>}</p>
+<p><br>/* MENSAGEM INICIAL */</p>
+<p>#mensagem {<br>&nbsp; &nbsp; position: absolute;</p>
+<p>&nbsp; &nbsp; top: 50%;<br>&nbsp; &nbsp; left: 50%;</p>
+<p>&nbsp; &nbsp; transform: translate(-50%, -50%);</p>
+<p>&nbsp; &nbsp; padding: 14px 20px;</p>
+<p>&nbsp; &nbsp; background: rgba(38, 50, 56, 0.9);</p>
+<p>&nbsp; &nbsp; color: white;</p>
+<p>&nbsp; &nbsp; border-radius: 10px;</p>
+<p>&nbsp; &nbsp; text-align: center;</p>
+<p>&nbsp; &nbsp; z-index: 1;</p>
+<p>&nbsp; &nbsp; max-width: 90%;</p>
+<p>&nbsp; &nbsp; font-size: 14px;<br>}</p>
+<p><br>/* RODAPÉ E CONTROLES */</p>
+<p>#controles {<br>&nbsp; &nbsp; background: white;</p>
+<p>&nbsp; &nbsp; padding: 12px 20px;</p>
+<p>&nbsp; &nbsp; display: flex;</p>
+<p>&nbsp; &nbsp; justify-content: center;</p>
+<p>&nbsp; &nbsp; align-items: center;</p>
+<p>&nbsp; &nbsp; gap: 40px;</p>
+<p>&nbsp; &nbsp; border-top: 1px solid #cfd8dc;<br>}</p>
+<p>.controle {<br>&nbsp; &nbsp; display: flex;</p>
+<p>&nbsp; &nbsp; flex-direction: column;</p>
+<p>&nbsp; &nbsp; gap: 4px;</p>
+<p>&nbsp; &nbsp; text-align: center;</p>
+<p>&nbsp; &nbsp; font-size: 12px;<br>}</p>
+<p>.controle strong {<br>&nbsp; &nbsp; color: #1565c0;</p>
+<p>&nbsp; &nbsp; font-size: 13px;<br>}</p>
+<p>.controle span {<br>&nbsp; &nbsp; color: #546e7a;<br>}</p>
+<p><br>/* TELAS MENORES */</p>
+<p>@media (max-width: 600px) {</p>
+<p>&nbsp; &nbsp; #interface {<br>&nbsp; &nbsp; &nbsp; &nbsp; flex-direction: column;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; align-items: flex-start;<br>&nbsp; &nbsp; }</p>
+<p>&nbsp; &nbsp; .titulo h1 {<br>&nbsp; &nbsp; &nbsp; &nbsp; font-size: 18px;<br>&nbsp; &nbsp; }</p>
+<p>&nbsp; &nbsp; #controles {<br>&nbsp; &nbsp; &nbsp; &nbsp; gap: 12px;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; padding: 10px 5px;<br>&nbsp; &nbsp; }</p>
+<p>&nbsp; &nbsp; .controle {<br>&nbsp; &nbsp; &nbsp; &nbsp; font-size: 10px;<br>&nbsp; &nbsp; }</p>
+<p>&nbsp; &nbsp; .controle strong {<br>&nbsp; &nbsp; &nbsp; &nbsp; font-size: 11px;<br>&nbsp; &nbsp; }</p>
+<p>}</p></pre>
+                </div>
 
-#interface {
-    background: #1565c0;
-    color: white;
-}</pre>
+                <h3>Passo 3.1 — Adicionando estilos do body e interface.</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>No final do style.css</span>
+                         
+                    </div>
+                    <pre><p>body {<br>&nbsp; &nbsp; font-family: Arial, sans-serif;</p>
+<p>&nbsp; &nbsp; background: #eaf2f8;</p>
+<p>&nbsp; &nbsp; color: #263238;</p>
+<p>&nbsp; &nbsp; overflow: hidden;</p>
+<p>&nbsp; &nbsp; height: 100vh;</p>
+<p>&nbsp; &nbsp; display: flex;<br>&nbsp; &nbsp; flex-direction: column;<br>}</p>
+<p><br>/* CABEÇALHO */</p>
+<p>#interface {<br>&nbsp; &nbsp; background: #263238;</p>
+<p>&nbsp; &nbsp; color: white;</p>
+<p>&nbsp; &nbsp; padding: 12px 20px;</p>
+<p>&nbsp; &nbsp; display: flex;</p>
+<p>&nbsp; &nbsp; justify-content: space-between;</p>
+<p>&nbsp; &nbsp; align-items: center;</p>
+<p>&nbsp; &nbsp; gap: 20px;</p>
+<p>&nbsp; &nbsp; z-index: 2;<br>}</p></pre>
                 </div>
 
                 <div class="activity-box">
@@ -914,7 +1001,7 @@
                 <div class="code-block">
                     <div class="code-header">
                         <span>game.js</span>
-                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                         
                     </div>
                     <p>// ==================================================<br>// 1. IMPORTAR O THREE.JS e DRACOLoader<br>// ==================================================</p>
 <p>import * as THREE from 'three';</p>
@@ -969,7 +1056,7 @@
                 <div class="code-block">
                     <div class="code-header">
                         <span>game.js</span>
-                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                         
                     </div>
                     <p><br>// ==================================================<br>// 4. CRIAR A CÂMERA<br>// ==================================================</p>
 <p>const camera = new THREE.PerspectiveCamera(</p>
@@ -1026,7 +1113,7 @@
                 <div class="code-block">
                     <div class="code-header">
                         <span>game.js</span>
-                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                         
                     </div>
                     <p><br>// ==================================================<br>// 6. ILUMINAÇÃO DO AMBIENTE<br>// ==================================================</p>
 <p>// Luz ambiente</p>
@@ -1074,7 +1161,7 @@
                 <div class="code-block">
                     <div class="code-header">
                         <span>game.js</span>
-                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                         
                     </div>
                     <p><br>// ==================================================<br>// 7. CRIAR O CAMPO<br>// ==================================================</p>
 <p>// Geometria do chão</p>
@@ -1124,7 +1211,7 @@
                 <div class="code-block">
                     <div class="code-header">
                         <span>game.js</span>
-                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                         
                     </div>
                     <p><br>// ==================================================<br>// 8. CRIAR ÁRVORES<br>// ==================================================</p>
 <p>function criarArvore(x, z) {</p>
@@ -1239,7 +1326,7 @@
                 <div class="code-block">
                     <div class="code-header">
                         <span>game.js</span>
-                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                         
                     </div>
                     <p><br>// ==================================================<br>// 10. CRIAR O PERSONAGEM<br>// ==================================================</p>
 <p>// Grupo que controla a posição e a direção do personagem</p>
@@ -1354,7 +1441,7 @@
                 <div class="code-block">
                     <div class="code-header">
                         <span>game.js</span>
-                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                         
                     </div>
                    <p><br>// ==================================================<br>// 11. CONTROLES DO TECLADO<br>// ==================================================</p>
 <p>// Registrar as teclas pressionadas</p>
@@ -1393,12 +1480,12 @@
                 </div>
             </section>
 
-            <!-- ETAPA 11 -->
-            <section class="step-card" id="etapa11">
+             <!-- ETAPA 11 -->
+           <section class="step-card" id="etapa11">
                 <div class="step-header">
                     <div class="step-title-group">
                         <span class="step-number">Etapa 11</span>
-                        <h2>Fazendo o personagem olhar na direção do movimento</h2>
+                        <h2></h2>
                     </div>
                     <label class="mark-completed-wrap">
                         <input type="checkbox" class="step-checkbox" data-step="etapa11">
@@ -1409,11 +1496,9 @@
                 <div class="code-block">
                     <div class="code-header">
                         <span>game.js</span>
-                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                         
                     </div>
-                    <pre>if (direcao.length() > 0) {
-    personagem.rotation.y = Math.atan2(direcao.x, direcao.z);
-}</pre>
+                    <pre></pre>
                 </div>
             </section>
 
@@ -1433,7 +1518,7 @@
                 <div class="code-block">
                     <div class="code-header">
                         <span>game.js</span>
-                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                         
                     </div>
                    <p><br>// ==================================================<br>// 12. CONFIGURAR A MOVIMENTAÇÃO<br>// ==================================================</p>
 <p>const velocidade = 6;</p>
@@ -1460,7 +1545,7 @@
                 <div class="code-block">
                     <div class="code-header">
                         <span>game.js</span>
-                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                         
                     </div>
                    <p><br>// ==================================================<br>// 13. ACOMPANHAR O PERSONAGEM COM A CÂMERA<br>// ==================================================</p>
 <p>const alvoCamera = new THREE.Vector3();</p>
@@ -1485,7 +1570,7 @@
                 <div class="code-block">
                     <div class="code-header">
                         <span>game.js</span>
-                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                         
                     </div>
                     <p><br>// ==================================================<br>// 15. FUNÇÃO PRINCIPAL DO JOGO<br>// ==================================================</p>
 <p>function animar() {</p>
@@ -1622,7 +1707,7 @@
                 <div class="code-block">
                     <div class="code-header">
                         <span>Terminal</span>
-                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                         
                     </div>
                     <pre>python3 -m http.server 8000</pre>
                 </div>
@@ -1645,7 +1730,7 @@
                 <div class="code-block">
                     <div class="code-header">
                         <span>Terminal Git</span>
-                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copiar</button>
+                         
                     </div>
                     <pre>git init
 git add .
