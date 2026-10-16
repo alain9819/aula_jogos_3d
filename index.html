@@ -566,7 +566,7 @@
             <i class="fa-solid fa-cube"></i>
             <div>
                 <h1>Meu Primeiro Mundo 3D</h1>
-                <span>Teens I &bull; Robótica & Programação</span>
+                <span>Teens I &bull; Robótica & Programação &bull; Prof. Alain</span>
             </div>
         </div>
 
@@ -601,17 +601,18 @@
                 <li class="nav-item"><a href="#etapa6"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 6: Iluminação</a></li>
                 <li class="nav-item"><a href="#etapa7"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 7: Campo Aberto</a></li>
                 <li class="nav-item"><a href="#etapa8"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 8: Árvores</a></li>
-                <li class="nav-item"><a href="#etapa9"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 9: Modelo .GLB</a></li>
-                <li class="nav-item"><a href="#etapa10"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 10: Movimentação</a></li>
-                <li class="nav-item"><a href="#etapa11"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 11: Rotação</a></li>
+                <li class="nav-item"><a href="#etapa9"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 9: Pedras</a></li>
+                <li class="nav-item"><a href="#etapa10"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 10: Modelo .GLB</a></li>
+                <li class="nav-item"><a href="#etapa11"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 11: Movimentação</a></li>
                 <li class="nav-item"><a href="#etapa12"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 12: Limites</a></li>
                 <li class="nav-item"><a href="#etapa13"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 13: Câmera Suave</a></li>
                 <li class="nav-item"><a href="#etapa14"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 14: Loop do Jogo</a></li>
-                <li class="nav-item"><a href="#etapa15"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 15: Testes</a></li>
-                <li class="nav-item"><a href="#etapa16"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 16: GitHub</a></li>
-                <li class="nav-item"><a href="#etapa17"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 17: Desafio Final</a></li>
-                <li class="nav-item"><a href="#etapa18"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 18: Reflexão</a></li>
-                <li class="nav-item"><a href="#etapa19"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 19: Avaliação</a></li>
+                <li class="nav-item"><a href="#etapa15"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 15: Relógio</a></li>
+                <li class="nav-item"><a href="#etapa16"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 16: Testes</a></li>
+                <li class="nav-item"><a href="#etapa17"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 17: GitHub</a></li>
+                <li class="nav-item"><a href="#etapa18"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 18: Desafio Final</a></li>
+                <li class="nav-item"><a href="#etapa19"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 19: Reflexão</a></li>
+                <li class="nav-item"><a href="#etapa20"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 20: Avaliação</a></li>
             </ul>
         </aside>
 
@@ -637,6 +638,14 @@
                 <h2><i class="fa-solid fa-gamepad" style="color: var(--secondary);"></i> Teste Interativo: Seu Mundo 3D Pré-visualizado</h2>
                 <p>Este é um exemplo funcionando em tempo real da cena que você construirá ao longo deste roteiro!</p>
                 <div id="demo-canvas-container">
+                    <iframe
+                        src="https://alain9819.github.io/primeiro-jogo-3d/"
+                        title="Meu Primeiro Jogo 3D"
+                        width="100%"
+                        height="500"
+                        style="border: none;"
+                        allowfullscreen>
+                    </iframe>
                     <div class="demo-controls-overlay">
                         <i class="fa-solid fa-keyboard"></i> Use <strong>W, A, S, D</strong> ou <strong>Setas</strong> para andar pelo campo.
                     </div>
@@ -1200,7 +1209,7 @@
                 <div class="step-header">
                     <div class="step-title-group">
                         <span class="step-number">Etapa 8</span>
-                        <h2>Criando árvores e pedras com funções</h2>
+                        <h2>Criando árvores</h2>
                     </div>
                     <label class="mark-completed-wrap">
                         <input type="checkbox" class="step-checkbox" data-step="etapa8">
@@ -1265,7 +1274,36 @@
 <p>&nbsp; &nbsp; criarArvore(-35, i);</p>
 <p>&nbsp; &nbsp; criarArvore(35, i);</p>
 <p>}</p>
-<p><br>// ==================================================<br>// 9. CRIAR PEDRAS DECORATIVAS<br>// ==================================================</p>
+
+                </div>
+
+                <div class="activity-box">
+                    <div class="activity-title"><i class="fa-solid fa-pen-to-square"></i> Atividade 8 — Criando uma floresta</div>
+                    <p>Por que o uso de funções facilita a criação de vários objetos idênticos pelo cenário?</p>
+                    <textarea class="notebook-input" id="q_e8_1" placeholder="Sua resposta..."></textarea>
+                </div>
+            </section>
+
+            <!-- ETAPA 9 -->
+            <section class="step-card" id="etapa9">
+                <div class="step-header">
+                    <div class="step-title-group">
+                        <span class="step-number">Etapa 9</span>
+                        <h2>Criando pedras decorativas</h2>
+                    </div>
+                    <label class="mark-completed-wrap">
+                        <input type="checkbox" class="step-checkbox" data-step="etapa9">
+                        Concluído
+                    </label>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>game.js</span>
+                         
+                    </div>
+                   <pre>
+                    <p><br>// ==================================================<br>// 9. CRIAR PEDRAS DECORATIVAS<br>// ==================================================</p>
 <p>function criarPedra(x, z) {</p>
 <p>&nbsp; &nbsp; const geometria = new THREE.DodecahedronGeometry(</p>
 <p>&nbsp; &nbsp; &nbsp; &nbsp; 0.5,</p>
@@ -1299,36 +1337,38 @@
 <p>&nbsp; &nbsp; const z = Math.random() * 50 - 25;</p>
 <p>&nbsp; &nbsp; criarPedra(x, z);</p>
 <p>}</p>
+                   </pre>
                 </div>
-
                 <div class="activity-box">
-                    <div class="activity-title"><i class="fa-solid fa-pen-to-square"></i> Atividade 8 — Criando uma floresta</div>
-                    <p>Por que o uso de funções facilita a criação de vários objetos idênticos pelo cenário?</p>
-                    <textarea class="notebook-input" id="q_e8_1" placeholder="Sua resposta..."></textarea>
+                    <div class="activity-title"><i class="fa-solid fa-pen-to-square"></i> Atividade 9 — Criando pedras</div>
+                    <p>Como a função <code>Math.random()</code> ajuda a criar pedras com posições e rotações diferentes?</p>
+                    <textarea class="notebook-input" id="q_e9_1" placeholder="Sua resposta..."></textarea>
                 </div>
+  
             </section>
 
-            <!-- ETAPA 9 -->
-            <section class="step-card" id="etapa9">
+            <!-- ETAPA 10 -->
+            <section class="step-card" id="etapa10">
                 <div class="step-header">
                     <div class="step-title-group">
-                        <span class="step-number">Etapa 9</span>
+                        <span class="step-number">Etapa 10</span>
                         <h2>Importando um personagem 3D com GLB</h2>
                     </div>
                     <label class="mark-completed-wrap">
-                        <input type="checkbox" class="step-checkbox" data-step="etapa9">
+                        <input type="checkbox" class="step-checkbox" data-step="etapa10">
                         Concluído
                     </label>
                 </div>
 
                 <p>Fontes de modelos 3D gratuitos: <strong>Sketchfab</strong>, <strong>Poly Pizza</strong> e <strong>Khronos Sample Assets</strong>.</p>
 
+
                 <div class="code-block">
                     <div class="code-header">
                         <span>game.js</span>
                          
                     </div>
-                    <p><br>// ==================================================<br>// 10. CRIAR O PERSONAGEM<br>// ==================================================</p>
+                    <pre><p><br>// ==================================================<br>// 10. CRIAR O PERSONAGEM<br>// ==================================================</p>
 <p>// Grupo que controla a posição e a direção do personagem</p>
 <p>const personagem = new THREE.Group();</p>
 <p>cena.add(personagem);</p>
@@ -1415,25 +1455,26 @@
 <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 'Verifique o arquivo assets/personagem.glb.';</p>
 <p>&nbsp; &nbsp; &nbsp; &nbsp; status.textContent = 'Erro ao carregar o modelo';</p>
 <p>&nbsp; &nbsp; }</p>
-<p>);</p>
+<p>);</p></pre>
                 </div>
-
-                <div class="activity-box">
+            
+                    <div class="activity-box">
                     <div class="activity-title"><i class="fa-solid fa-pen-to-square"></i> Atividade 9 — Testando seu modelo</div>
                     <p>O personagem apareceu na altura correta em relação ao chão? Precisou ajustar a escala?</p>
                     <textarea class="notebook-input" id="q_e9_1" placeholder="Escreva suas observações..."></textarea>
                 </div>
+
             </section>
 
-            <!-- ETAPA 10 -->
-            <section class="step-card" id="etapa10">
+             <!-- ETAPA 11 -->
+           <section class="step-card" id="etapa11">
                 <div class="step-header">
                     <div class="step-title-group">
-                        <span class="step-number">Etapa 10</span>
+                        <span class="step-number">Etapa 11</span>
                         <h2>Programando a movimentação do personagem</h2>
                     </div>
                     <label class="mark-completed-wrap">
-                        <input type="checkbox" class="step-checkbox" data-step="etapa10">
+                        <input type="checkbox" class="step-checkbox" data-step="etapa11">
                         Concluído
                     </label>
                 </div>
@@ -1443,7 +1484,7 @@
                         <span>game.js</span>
                          
                     </div>
-                   <p><br>// ==================================================<br>// 11. CONTROLES DO TECLADO<br>// ==================================================</p>
+                    <pre><p><br>// ==================================================<br>// 11. CONTROLES DO TECLADO<br>// ==================================================</p>
 <p>// Registrar as teclas pressionadas</p>
 <p>const teclas = {};</p>
 <p><br>// Detectar quando uma tecla é pressionada</p>
@@ -1470,35 +1511,12 @@
 <p>&nbsp; &nbsp; for (const tecla in teclas) {</p>
 <p>&nbsp; &nbsp; &nbsp; &nbsp; teclas[tecla] = false;</p>
 <p>&nbsp; &nbsp; }</p>
-<p>});</p>
+<p>});</p></pre>
                 </div>
-
-                <div class="activity-box">
-                    <div class="activity-title"><i class="fa-solid fa-pen-to-square"></i> Atividade 10 — Teste de Velocidade</div>
+                    <div class="activity-box">
+                    <div class="activity-title"><i class="fa-solid fa-pen-to-square"></i> Atividade 11 — Teste de Velocidade</div>
                     <p>Qual valor de velocidade ficou ideal para o seu cenário e por quê?</p>
-                    <textarea class="notebook-input" id="q_e10_1" placeholder="Sua resposta..."></textarea>
-                </div>
-            </section>
-
-             <!-- ETAPA 11 -->
-           <section class="step-card" id="etapa11">
-                <div class="step-header">
-                    <div class="step-title-group">
-                        <span class="step-number">Etapa 11</span>
-                        <h2></h2>
-                    </div>
-                    <label class="mark-completed-wrap">
-                        <input type="checkbox" class="step-checkbox" data-step="etapa11">
-                        Concluído
-                    </label>
-                </div>
-
-                <div class="code-block">
-                    <div class="code-header">
-                        <span>game.js</span>
-                         
-                    </div>
-                    <pre></pre>
+                    <textarea class="notebook-input" id="q_e11_1" placeholder="Sua resposta..."></textarea>
                 </div>
             </section>
 
@@ -1547,22 +1565,45 @@
                         <span>game.js</span>
                          
                     </div>
-                   <p><br>// ==================================================<br>// 13. ACOMPANHAR O PERSONAGEM COM A CÂMERA<br>// ==================================================</p>
+                   <pre><p><br>// ==================================================<br>// 13. ACOMPANHAR O PERSONAGEM COM A CÂMERA<br>// ==================================================</p>
 <p>const alvoCamera = new THREE.Vector3();</p>
-<p><br>// ==================================================<br>// 14. RELÓGIO PARA CONTROLAR O TEMPO<br>// ==================================================</p>
-<p>const relogio = new THREE.Clock();</p>
+<p></pre>
                 </div>
             </section>
+
 
             <!-- ETAPA 14 -->
             <section class="step-card" id="etapa14">
                 <div class="step-header">
                     <div class="step-title-group">
                         <span class="step-number">Etapa 14</span>
-                        <h2>Compreendendo o Loop do Jogo</h2>
+                        <h2>Relógio para controlar o tempo</h2>
                     </div>
                     <label class="mark-completed-wrap">
                         <input type="checkbox" class="step-checkbox" data-step="etapa14">
+                        Concluído
+                    </label>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>game.js</span>
+                         
+                    </div>
+                   <pre><p><br>// ==================================================<br>// 14. RELÓGIO PARA CONTROLAR O TEMPO<br>// ==================================================</p>
+<p>const relogio = new THREE.Clock();</p></pre>
+                </div>
+            </section>
+
+            <!-- ETAPA 15 -->
+            <section class="step-card" id="etapa15">
+                <div class="step-header">
+                    <div class="step-title-group">
+                        <span class="step-number">Etapa 15</span>
+                        <h2>Função Principal do Jogo</h2>
+                    </div>
+                    <label class="mark-completed-wrap">
+                        <input type="checkbox" class="step-checkbox" data-step="etapa15">
                         Concluído
                     </label>
                 </div>
@@ -1668,7 +1709,36 @@
 <p>}</p>
 <p><br>// Iniciar o jogo</p>
 <p>animar();</p>
-<p><br>// ==================================================<br>// 16. AJUSTAR A TELA QUANDO A JANELA MUDA DE TAMANHO<br>// ==================================================</p>
+
+                </div>
+
+                <div class="activity-box">
+                    <div class="activity-title"><i class="fa-solid fa-pen-to-square"></i> Atividade 16 — Reflexão</div>
+                    <p>Qual é a função do método <code>requestAnimationFrame()</code> no loop do jogo?</p>
+                    <textarea class="notebook-input" id="q_e16_1" placeholder="Sua resposta..."></textarea>
+                </div>
+            </section>
+
+
+            <!-- ETAPA 16 -->
+            <section class="step-card" id="etapa16">
+                <div class="step-header">
+                    <div class="step-title-group">
+                        <span class="step-number">Etapa 16</span>
+                        <h2>Ajustando a Tela</h2>
+                    </div>
+                    <label class="mark-completed-wrap">
+                        <input type="checkbox" class="step-checkbox" data-step="etapa16">
+                        Concluído
+                    </label>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>game.js</span>
+                         
+                    </div>
+                    <p><br>// ==================================================<br>// 16. AJUSTAR A TELA QUANDO A JANELA MUDA DE TAMANHO<br>// ==================================================</p>
 <p>window.addEventListener('resize', function () {</p>
 <p>&nbsp; &nbsp; const largura = areaJogo.clientWidth;</p>
 <p>&nbsp; &nbsp; const altura = areaJogo.clientHeight;</p>
@@ -1684,21 +1754,21 @@
                 </div>
 
                 <div class="activity-box">
-                    <div class="activity-title"><i class="fa-solid fa-pen-to-square"></i> Atividade 14 — Reflexão</div>
+                    <div class="activity-title"><i class="fa-solid fa-pen-to-square"></i> Atividade 16 — Reflexão</div>
                     <p>Qual é a função do método <code>requestAnimationFrame()</code> no loop do jogo?</p>
-                    <textarea class="notebook-input" id="q_e14_1" placeholder="Sua resposta..."></textarea>
+                    <textarea class="notebook-input" id="q_e16_1" placeholder="Sua resposta..."></textarea>
                 </div>
             </section>
 
-            <!-- ETAPA 15 -->
-            <section class="step-card" id="etapa15">
+            <!-- ETAPA 17 -->
+            <section class="step-card" id="etapa17">
                 <div class="step-header">
                     <div class="step-title-group">
-                        <span class="step-number">Etapa 15</span>
+                        <span class="step-number">Etapa 17</span>
                         <h2>Executando e Testando Localmente</h2>
                     </div>
                     <label class="mark-completed-wrap">
-                        <input type="checkbox" class="step-checkbox" data-step="etapa15">
+                        <input type="checkbox" class="step-checkbox" data-step="etapa17">
                         Concluído
                     </label>
                 </div>
@@ -1714,15 +1784,15 @@
                 <p>Em seguida, acesse no navegador: <code>http://localhost:8000</code></p>
             </section>
 
-            <!-- ETAPA 16 -->
-            <section class="step-card" id="etapa16">
+            <!-- ETAPA 18 -->
+            <section class="step-card" id="etapa18">
                 <div class="step-header">
                     <div class="step-title-group">
-                        <span class="step-number">Etapa 16</span>
+                        <span class="step-number">Etapa 18</span>
                         <h2>Publicando e Versionando no GitHub</h2>
                     </div>
                     <label class="mark-completed-wrap">
-                        <input type="checkbox" class="step-checkbox" data-step="etapa16">
+                        <input type="checkbox" class="step-checkbox" data-step="etapa18">
                         Concluído
                     </label>
                 </div>
@@ -1739,15 +1809,86 @@ git push </pre>
                 </div>
             </section>
 
-            <!-- ETAPA 17 -->
-            <section class="step-card" id="etapa17">
+            <!-- ETAPA 19 -->
+            <section class="step-card" id="etapa19">
                 <div class="step-header">
                     <div class="step-title-group">
-                        <span class="step-number">Etapa 17</span>
-                        <h2>Desafio Final: Personalize seu Mundo 3D</h2>
+                        <span class="step-number">Etapa 19</span>
+                        <h2>Passo a passo para adicionar um colaborador no GitHub</h2>
                     </div>
                     <label class="mark-completed-wrap">
-                        <input type="checkbox" class="step-checkbox" data-step="etapa17">
+                        <input type="checkbox" class="step-checkbox" data-step="etapa19">
+                        Concluído
+                    </label>
+                </div>
+
+                <ol>
+                    <li>
+                        <strong>Acesse o repositório</strong> no
+                        <a href="https://github.com/" target="_blank" rel="noopener noreferrer">
+                            GitHub
+                        </a>,
+                        utilizando a conta do proprietário do projeto.
+                    </li>
+
+                    <li>
+                        Clique na aba <strong>Settings</strong> (Configurações),
+                        localizada no menu superior do repositório.
+                    </li>
+
+                    <li>
+                        Na barra lateral esquerda, clique em
+                        <strong>Collaborators</strong> (Colaboradores).
+                        <em>O GitHub pode solicitar a confirmação da sua senha.</em>
+                    </li>
+
+                    <li>
+                        Clique no botão verde
+                        <strong>Add people</strong> (Adicionar pessoas).
+                    </li>
+
+                    <li>
+                        Digite o <strong>nome de usuário do GitHub</strong>,
+                        o nome completo ou o <strong>e-mail</strong> do outro
+                        desenvolvedor e selecione a pessoa na lista.
+                    </li>
+
+                    <li>
+                        Clique em <strong>Add [nome de usuário] to this repository</strong>
+                        para enviar o convite.
+                    </li>
+
+                    <li>
+                        O outro desenvolvedor receberá um convite por e-mail e uma
+                        notificação no próprio GitHub. Ele precisará
+                        <strong>aceitar o convite</strong> para obter as permissões
+                        concedidas pelo proprietário, incluindo escrita no repositório,
+                        quando autorizada.
+                    </li>
+                </ol>
+
+                <h3>O que acontece depois?</h3>
+
+                <p>
+                    Depois de aceitar o convite, o colaborador poderá participar
+                    do desenvolvimento do projeto conforme as permissões concedidas.
+                    Isso permite que os integrantes da equipe trabalhem no mesmo
+                    repositório, enviando alterações no código por meio de
+                    <code>commit</code> e <code>push</code>.
+                </p>
+
+            </section>
+
+
+            <!-- ETAPA 20 -->
+            <section class="step-card" id="etapa20">
+                <div class="step-header">
+                    <div class="step-title-group">
+                        <span class="step-number">Etapa 20</span>
+                        <h2>Registro de Aprendizagem & Reflexão Final</h2>
+                    </div>
+                    <label class="mark-completed-wrap">
+                        <input type="checkbox" class="step-checkbox" data-step="etapa20">
                         Concluído
                     </label>
                 </div>
@@ -1763,19 +1904,19 @@ git push </pre>
 
                 <div class="activity-box challenge">
                     <div class="activity-title"><i class="fa-solid fa-star"></i> Desafios Extras Escolhidos</div>
-                    <textarea class="notebook-input" id="q_e17_1" placeholder="Descreva quais desafios extras (A, B, C, D, E, F ou G) você escolheu implementar..."></textarea>
+                    <textarea class="notebook-input" id="q_e18_1" placeholder="Descreva quais desafios extras (A, B, C, D, E, F ou G) você escolheu implementar..."></textarea>
                 </div>
             </section>
 
-            <!-- ETAPA 18 -->
-            <section class="step-card" id="etapa18">
+            <!-- ETAPA 21 -->
+            <section class="step-card" id="etapa21">
                 <div class="step-header">
                     <div class="step-title-group">
-                        <span class="step-number">Etapa 18</span>
-                        <h2>Registro de Aprendizagem & Reflexão Final</h2>
+                        <span class="step-number">Etapa 21</span>
+                        <h2>Rubrica de Avaliação do Projeto</h2>
                     </div>
                     <label class="mark-completed-wrap">
-                        <input type="checkbox" class="step-checkbox" data-step="etapa18">
+                        <input type="checkbox" class="step-checkbox" data-step="etapa21">
                         Concluído
                     </label>
                 </div>
@@ -1797,15 +1938,15 @@ git push </pre>
                 </div>
             </section>
 
-            <!-- ETAPA 19 -->
-            <section class="step-card" id="etapa19">
+            <!-- ETAPA 22 -->
+            <section class="step-card" id="etapa22">
                 <div class="step-header">
                     <div class="step-title-group">
-                        <span class="step-number">Etapa 19</span>
+                        <span class="step-number">Etapa 22</span>
                         <h2>Rubrica de Avaliação do Projeto</h2>
                     </div>
                     <label class="mark-completed-wrap">
-                        <input type="checkbox" class="step-checkbox" data-step="etapa19">
+                        <input type="checkbox" class="step-checkbox" data-step="etapa22">
                         Concluído
                     </label>
                 </div>
@@ -1866,114 +2007,7 @@ git push </pre>
     <!-- Scripts de Interatividade da Página e Sandbox Three.js -->
     <script>
         // --- 1. SCRIPT DO DEMO 3D INTERATIVO (SANDBOX) ---
-        (function initDemo3D() {
-            const container = document.getElementById('demo-canvas-container');
-            if(!container) return;
 
-            const scene = new THREE.Scene();
-            scene.background = new THREE.Color(0x87ceeb);
-
-            const camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 100);
-            camera.position.set(0, 8, 12);
-
-            const renderer = new THREE.WebGLRenderer({ antialias: true });
-            renderer.setSize(container.clientWidth, container.clientHeight);
-            container.appendChild(renderer.domElement);
-
-            // Luzes
-            const light = new THREE.HemisphereLight(0xffffff, 0x444444, 1.2);
-            scene.add(light);
-            const dirLight = new THREE.DirectionalLight(0xffffff, 1.5);
-            dirLight.position.set(10, 20, 10);
-            scene.add(dirLight);
-
-            // Chão
-            const floorGeo = new THREE.PlaneGeometry(60, 60);
-            const floorMat = new THREE.MeshStandardMaterial({ color: 0x4caf50 });
-            const floor = new THREE.Mesh(floorGeo, floorMat);
-            floor.rotation.x = -Math.PI / 2;
-            scene.add(floor);
-
-            // Árvores simples
-            function addTree(x, z) {
-                const trunkGeo = new THREE.CylinderGeometry(0.2, 0.3, 1.2, 8);
-                const trunkMat = new THREE.MeshStandardMaterial({ color: 0x8b5a2b });
-                const trunk = new THREE.Mesh(trunkGeo, trunkMat);
-                trunk.position.set(x, 0.6, z);
-
-                const leavesGeo = new THREE.ConeGeometry(1, 2, 8);
-                const leavesMat = new THREE.MeshStandardMaterial({ color: 0x2e7d32 });
-                const leaves = new THREE.Mesh(leavesGeo, leavesMat);
-                leaves.position.set(x, 2, z);
-
-                scene.add(trunk);
-                scene.add(leaves);
-            }
-
-            addTree(5, -5);
-            addTree(-8, -10);
-            addTree(12, 8);
-            addTree(-10, 6);
-
-            // Personagem (Cubo Representativo)
-            const playerGeo = new THREE.BoxGeometry(1, 1.5, 1);
-            const playerMat = new THREE.MeshStandardMaterial({ color: 0x4f46e5 });
-            const player = new THREE.Mesh(playerGeo, playerMat);
-            player.position.y = 0.75;
-            scene.add(player);
-
-            // Controles
-            const keys = {};
-            window.addEventListener('keydown', (e) => keys[e.key.toLowerCase()] = true);
-            window.addEventListener('keyup', (e) => keys[e.key.toLowerCase()] = false);
-
-            const clock = new THREE.Clock();
-
-            function animate() {
-                requestAnimationFrame(animate);
-                const delta = clock.getDelta();
-                const speed = 7;
-
-                let moveX = 0;
-                let moveZ = 0;
-
-                if (keys['w'] || keys['arrowup']) moveZ -= 1;
-                if (keys['s'] || keys['arrowdown']) moveZ += 1;
-                if (keys['a'] || keys['arrowleft']) moveX -= 1;
-                if (keys['d'] || keys['arrowright']) moveX += 1;
-
-                if (moveX !== 0 || moveZ !== 0) {
-                    const len = Math.sqrt(moveX * moveX + moveZ * moveZ);
-                    moveX /= len;
-                    moveZ /= len;
-
-                    player.position.x += moveX * speed * delta;
-                    player.position.z += moveZ * speed * delta;
-
-                    // Limites
-                    player.position.x = Math.max(-25, Math.min(25, player.position.x));
-                    player.position.z = Math.max(-25, Math.min(25, player.position.z));
-
-                    player.rotation.y = Math.atan2(moveX, moveZ);
-                }
-
-                // Câmera Suave
-                camera.position.x = player.position.x;
-                camera.position.z = player.position.z + 10;
-                camera.lookAt(player.position);
-
-                renderer.render(scene, camera);
-            }
-
-            animate();
-
-            window.addEventListener('resize', () => {
-                if(!container) return;
-                camera.aspect = container.clientWidth / container.clientHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(container.clientWidth, container.clientHeight);
-            });
-        })();
 
         // --- 2. SALVAMENTO AUTOMÁTICO DAS RESPOSTAS (LOCALSTORAGE) ---
         document.querySelectorAll('.notebook-input').forEach(textarea => {
