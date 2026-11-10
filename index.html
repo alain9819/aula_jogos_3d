@@ -582,14 +582,7 @@
             <span class="progress-text" id="progressText">0% Concluído</span>
         </div>
 
-        <div class="actions-btn">
-            <button class="btn btn-secondary" onclick="exportNotebook()">
-                <i class="fa-solid fa-file-export"></i> Exportar Respostas
-            </button>
-            <button class="btn" onclick="window.print()">
-                <i class="fa-solid fa-print"></i> Imprimir / PDF
-            </button>
-        </div>
+
     </header>
 
     <div class="app-container">
@@ -619,6 +612,7 @@
                 <li class="nav-item"><a href="#etapa19"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 19: Collaborators</a></li>
                 <li class="nav-item"><a href="#etapa20"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 20: Personalização</a></li>
                 <li class="nav-item"><a href="#etapa21"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 21: Carregar GLB</a></li>
+                <li class="nav-item"><a href="#etapa22"><i class="fa-solid fa-circle-check check-icon"></i> Etapa 22: Câmera em Primeira Pessoa</a></li>
             
             </ul>
         </aside>
@@ -637,25 +631,6 @@
                     <span class="tag"><i class="fa-solid fa-cubes"></i> Three.js</span>
                     <span class="tag"><i class="fa-solid fa-code"></i> VS Code</span>
                     <span class="tag"><i class="fa-brands fa-github"></i> GitHub</span>
-                </div>
-            </section>
-
-            <!-- Playground / Demo Interativo 3D -->
-            <section class="demo-section">
-                <h2><i class="fa-solid fa-gamepad" style="color: var(--secondary);"></i> Teste Interativo: Seu Mundo 3D Pré-visualizado</h2>
-                <p>Este é um exemplo funcionando em tempo real da cena que você construirá ao longo deste roteiro!</p>
-                <div id="demo-canvas-container">
-                    <iframe
-                        src="https://alain9819.github.io/primeiro-jogo-3d/"
-                        title="Meu Primeiro Jogo 3D"
-                        width="100%"
-                        height="500"
-                        style="border: none;"
-                        allowfullscreen>
-                    </iframe>
-                    <div class="demo-controls-overlay">
-                        <i class="fa-solid fa-keyboard"></i> Use <strong>W, A, S, D</strong> ou <strong>Setas</strong> para andar pelo campo.
-                    </div>
                 </div>
             </section>
 
@@ -745,27 +720,6 @@
                     </table>
                 </div>
 
-                <!-- Atividade 1 -->
-                <div class="activity-box">
-                    <div class="activity-title"><i class="fa-solid fa-pen-to-square"></i> Atividade 1 — Organizando os arquivos</div>
-                    <p>1. Qual é a função do arquivo <code>index.html</code>?</p>
-                    <textarea class="notebook-input" id="q_e1_1" placeholder="Digite sua resposta aqui..."></textarea>
-                    
-                    <p style="margin-top:0.8rem;">2. Por que o código JavaScript ficará separado do HTML?</p>
-                    <textarea class="notebook-input" id="q_e1_2" placeholder="Digite sua resposta aqui..."></textarea>
-
-                    <p style="margin-top:0.8rem;">3. Para que serve a pasta <code>assets</code>?</p>
-                    <textarea class="notebook-input" id="q_e1_3" placeholder="Digite sua resposta aqui..."></textarea>
-
-                    <p style="margin-top:0.8rem;">4. O que poderia acontecer se o nome do arquivo no código fosse diferente do nome salvo na pasta?</p>
-                    <textarea class="notebook-input" id="q_e1_4" placeholder="Digite sua resposta aqui..."></textarea>
-                </div>
-
-                <div class="activity-box challenge">
-                    <div class="activity-title"><i class="fa-solid fa-trophy"></i> Desafio</div>
-                    <p>Crie toda a estrutura de pastas no VS Code antes de começar a programar.</p>
-                </div>
-            </section>
 
             <!-- ETAPA 2 -->
             <section class="step-card" id="etapa2">
@@ -876,12 +830,6 @@
                     <pre>&lt;script type="module" src="game.js"&gt;&lt;/script&gt;</pre>
                 </div>
 
-                <div class="activity-box">
-                    <div class="activity-title"><i class="fa-solid fa-pen-to-square"></i> Atividade 2 — Explorando o HTML</div>
-                    <p>Altere o título e a mensagem apresentada ao jogador. Responda:</p>
-                    <p>Se você modificar o título no HTML, precisará alterar o arquivo JavaScript? Explique sua resposta.</p>
-                    <textarea class="notebook-input" id="q_e2_1" placeholder="Explique aqui..."></textarea>
-                </div>
             </section>
 
             <!-- ETAPA 3 -->
@@ -988,11 +936,6 @@
 <p>&nbsp; &nbsp; z-index: 2;<br>}</p></pre>
                 </div>
 
-                <div class="activity-box">
-                    <div class="activity-title"><i class="fa-solid fa-paint-brush"></i> Atividade 3 — Personalize a interface</div>
-                    <p>Descreva as cores e a identidade visual que você escolheu para seu mundo 3D:</p>
-                    <textarea class="notebook-input" id="q_e3_1" placeholder="Descreva sua identidade visual (ex: Tema Espacial, Floresta Dark...)"></textarea>
-                </div>
             </section>
 
             <!-- ETAPA 4 -->
@@ -1049,11 +992,6 @@
                     </table>
                 </div>
 
-                <div class="activity-box">
-                    <div class="activity-title"><i class="fa-solid fa-pen-to-square"></i> Atividade 4 — Modificando o céu</div>
-                    <p>Qual cor hexadecimal você escolheu para o seu céu e por quê?</p>
-                    <textarea class="notebook-input" id="q_e4_1" placeholder="Digite sua escolha..."></textarea>
-                </div>
             </section>
 
             <!-- ETAPA 5 -->
@@ -1103,14 +1041,6 @@
 <p>areaJogo.appendChild(renderer.domElement);</p>
                 </div>
 
-                <div class="activity-box">
-                    <div class="activity-title"><i class="fa-solid fa-pen-to-square"></i> Atividade 5 — Investigando a câmera</div>
-                    <p>1. O que acontece quando aumentamos o valor de Y da câmera?</p>
-                    <textarea class="notebook-input" id="q_e5_1" placeholder="Resposta..."></textarea>
-
-                    <p style="margin-top:0.8rem;">2. O que acontece quando aumentamos o valor de Z?</p>
-                    <textarea class="notebook-input" id="q_e5_2" placeholder="Resposta..."></textarea>
-                </div>
             </section>
 
             <!-- ETAPA 6 -->
@@ -1154,11 +1084,6 @@
 <p>cena.add(sol);</p>
                 </div>
 
-                <div class="activity-box">
-                    <div class="activity-title"><i class="fa-solid fa-pen-to-square"></i> Atividade 6 — Modificando a iluminação</div>
-                    <p>Como a alteração da posição da luz direcional altera a atmosfera do seu jogo?</p>
-                    <textarea class="notebook-input" id="q_e6_1" placeholder="Sua observação..."></textarea>
-                </div>
             </section>
 
             <!-- ETAPA 7 -->
@@ -1284,11 +1209,6 @@
 
                 </div>
 
-                <div class="activity-box">
-                    <div class="activity-title"><i class="fa-solid fa-pen-to-square"></i> Atividade 8 — Criando uma floresta</div>
-                    <p>Por que o uso de funções facilita a criação de vários objetos idênticos pelo cenário?</p>
-                    <textarea class="notebook-input" id="q_e8_1" placeholder="Sua resposta..."></textarea>
-                </div>
             </section>
 
             <!-- ETAPA 9 -->
@@ -1345,11 +1265,6 @@
 <p>&nbsp; &nbsp; criarPedra(x, z);</p>
 <p>}</p>
                    </pre>
-                </div>
-                <div class="activity-box">
-                    <div class="activity-title"><i class="fa-solid fa-pen-to-square"></i> Atividade 9 — Criando pedras</div>
-                    <p>Como a função <code>Math.random()</code> ajuda a criar pedras com posições e rotações diferentes?</p>
-                    <textarea class="notebook-input" id="q_e9_1" placeholder="Sua resposta..."></textarea>
                 </div>
   
             </section>
@@ -1464,12 +1379,6 @@
 <p>&nbsp; &nbsp; }</p>
 <p>);</p></pre>
                 </div>
-            
-                    <div class="activity-box">
-                    <div class="activity-title"><i class="fa-solid fa-pen-to-square"></i> Atividade 10 — Testando seu modelo</div>
-                    <p>O personagem apareceu na altura correta em relação ao chão? Precisou ajustar a escala?</p>
-                    <textarea class="notebook-input" id="q_e10_1" placeholder="Escreva suas observações..."></textarea>
-                </div>
 
             </section>
 
@@ -1519,12 +1428,7 @@
 <p>&nbsp; &nbsp; &nbsp; &nbsp; teclas[tecla] = false;</p>
 <p>&nbsp; &nbsp; }</p>
 <p>});</p></pre>
-                </div>
-                    <div class="activity-box">
-                    <div class="activity-title"><i class="fa-solid fa-pen-to-square"></i> Atividade 11 — Teste de Velocidade</div>
-                    <p>Qual valor de velocidade ficou ideal para o seu cenário e por quê?</p>
-                    <textarea class="notebook-input" id="q_e11_1" placeholder="Sua resposta..."></textarea>
-                </div>
+
             </section>
 
             <!-- ETAPA 12 -->
@@ -1719,11 +1623,6 @@
 
                 </div>
 
-                <div class="activity-box">
-                    <div class="activity-title"><i class="fa-solid fa-pen-to-square"></i> Atividade 15 — Reflexão</div>
-                    <p>Qual é a função do método <code>requestAnimationFrame()</code> no loop do jogo?</p>
-                    <textarea class="notebook-input" id="q_e15_1" placeholder="Sua resposta..."></textarea>
-                </div>
             </section>
 
 
@@ -1760,11 +1659,6 @@
 <p>});</p>
                 </div>
 
-                <div class="activity-box">
-                    <div class="activity-title"><i class="fa-solid fa-pen-to-square"></i> Atividade 16 — Reflexão</div>
-                    <p>Qual é a função do método <code>requestAnimationFrame()</code> no loop do jogo?</p>
-                    <textarea class="notebook-input" id="q_e16_1" placeholder="Sua resposta..."></textarea>
-                </div>
             </section>
 
             <!-- ETAPA 17 -->
@@ -1978,11 +1872,12 @@ git push </pre>
             </section>
 
             <!-- ETAPA 22 -->
-            <!-- <section class="step-card" id="etapa22">
+            <section class="step-card" id="etapa22">
                 <div class="step-header">
                     <div class="step-title-group">
                         <span class="step-number">Etapa 22</span>
-                        <h2>Rubrica de Avaliação do Projeto</h2>
+                        <h2>Mudar câmera para terceira pessoa.</h2>
+                        <p>No código no game.js, dentro da função animar(), procure o código abaixo e troque pelo novo código: </p>
                     </div>
                     <label class="mark-completed-wrap">
                         <input type="checkbox" class="step-checkbox" data-step="etapa22">
@@ -1990,50 +1885,214 @@ git push </pre>
                     </label>
                 </div>
 
-                <div class="table-responsive">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Critério</th>
-                                <th>Iniciante</th>
-                                <th>Básico</th>
-                                <th>Intermediário</th>
-                                <th>Avançado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Organização</strong></td>
-                                <td>Arquivos desorganizados.</td>
-                                <td>Organiza parte dos arquivos.</td>
-                                <td>Mantém estrutura organizada.</td>
-                                <td>Organização impecável.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Modelo GLB</strong></td>
-                                <td>Não conseguiu importar.</td>
-                                <td>Importa com ajuda.</td>
-                                <td>Importa e ajusta escala.</td>
-                                <td>Ajusta e resolve problemas avançados.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Movimentação</strong></td>
-                                <td>Com dificuldades.</td>
-                                <td>Controles parciais.</td>
-                                <td>Controles funcionando perfeitamente.</td>
-                                <td>Compreende e customiza a física.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Cenário 3D</strong></td>
-                                <td>Poucos elementos.</td>
-                                <td>Campo e alguns objetos.</td>
-                                <td>Cenário rico e funcional.</td>
-                                <td>Ambiente altamente original.</td>
-                            </tr>
-                        </tbody>
-                    </table>
+<div class="code-block">
+                    <div class="code-header">
+                        <span>game.js</span>
+                         
+                    </div>
+                    <pre>
+<p>// ==================================================<br>// CÂMERA QUE ACOMPANHA O PERSONAGEM<br>// ==================================================</p>
+<p>// Definir onde a câmera deve ficar</p>
+<p>const posicaoDesejada = new THREE.Vector3(</p>
+<p>&nbsp; &nbsp; personagem.position.x,</p>
+<p>&nbsp; &nbsp; personagem.position.y + 6,</p>
+<p>&nbsp; &nbsp; personagem.position.z + 9</p>
+<p>);</p>
+<p><br>// Movimento suave da câmera</p>
+<p>camera.position.lerp(</p>
+<p>&nbsp; &nbsp; posicaoDesejada,</p>
+<p>&nbsp; &nbsp; 1 - Math.exp(-4 * delta)</p>
+<p>);</p>
+<p><br>// Definir o ponto que a câmera observa</p>
+<p>alvoCamera.set(</p>
+<p>&nbsp; &nbsp; personagem.position.x,</p>
+<p>&nbsp; &nbsp; personagem.position.y + 1,</p>
+<p>&nbsp; &nbsp; personagem.position.z</p>
+<p>);</p>
+<p><br>camera.lookAt(alvoCamera);</p> </pre>
                 </div>
-            </section> -->
+                    <div class="step-title-group">
+                        <h2>Novo código para câmera em terceira pessoa</h2>
+                    </div>
+
+<div class="code-block">
+                    <div class="code-header">
+                        <span>game.js</span>
+                         
+                    </div>
+                    <pre>
+                     <p><br>&nbsp; &nbsp; &nbsp; &nbsp; // ==================================================<br>&nbsp; &nbsp; &nbsp; &nbsp; // CÂMERA EM TERCEIRA PESSOA<br>&nbsp; &nbsp; &nbsp; &nbsp; // ==================================================</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; // Distância da câmera até o personagem<br>&nbsp; &nbsp; &nbsp; &nbsp; const distanciaCamera = 9;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; // Altura da câmera<br>&nbsp; &nbsp; &nbsp; &nbsp; const alturaCamera = 6;</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; // Calcular a posição desejada da câmera</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; const deslocamentoCamera = new THREE.Vector3(</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; alturaCamera,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; -distanciaCamera</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; );</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; // Girar o deslocamento conforme a direção do personagem<br>&nbsp; &nbsp; &nbsp; &nbsp; deslocamentoCamera.applyQuaternion(<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; personagem.quaternion<br>&nbsp; &nbsp; &nbsp; &nbsp; );</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; // Calcular a posição desejada<br>&nbsp; &nbsp; &nbsp; &nbsp; const posicaoDesejada = new THREE.Vector3(</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; personagem.position.x + deslocamentoCamera.x,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; personagem.position.y + deslocamentoCamera.y,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; personagem.position.z + deslocamentoCamera.z</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; );</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; // Movimento suave da câmera<br>&nbsp; &nbsp; &nbsp; &nbsp; camera.position.lerp(</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; posicaoDesejada,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1 - Math.exp(-1 * delta)</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; );</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; // Definir o ponto que a câmera observa<br>&nbsp; &nbsp; &nbsp; &nbsp; alvoCamera.set(</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; personagem.position.x,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; personagem.position.y + 1,</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; personagem.position.z</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; );</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; // Fazer a câmera olhar para o personagem<br>&nbsp; &nbsp; &nbsp; &nbsp; camera.lookAt(alvoCamera);</p>
+<p>&nbsp; &nbsp; }</p>   
+ </pre>
+                </div>
+
+                    <div class="step-title-group">
+                        <h2>Mudar câmera para Primeira Pessoa.</h2>
+                        <p>No código no game.js, dentro da função animar(), faça os ajustes necessários: </p>
+                    <pre>2. Como funciona?</pre>
+<p>As principais alterações são:</p>
+<table>
+  <thead>
+    <tr>
+      <th>Código</th>
+      <th>Função</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>alturaCamera = 1.6</code></td>
+      <td>Define a altura dos olhos do jogador.</td>
+    </tr>
+    <tr>
+      <td><code>deslocamentoFrontal = 0.1</code></td>
+      <td>Desloca um pouco a câmera para frente.</td>
+    </tr>
+    <tr>
+      <td><code>applyQuaternion()</code></td>
+      <td>Faz a câmera acompanhar a rotação do personagem.</td>
+    </tr>
+    <tr>
+      <td><code>camera.position.lerp()</code></td>
+      <td>Suaviza o movimento da câmera.</td>
+    </tr>
+    <tr>
+      <td><code>camera.lookAt()</code></td>
+      <td>Faz a câmera olhar para a direção do personagem.</td>
+    </tr>
+  </tbody>
+</table>
+<h2>3. Ajuste a altura da câmera</h2>
+<p>Dependendo do tamanho do seu modelo <code>.glb</code>, talvez seja necessário ajustar a altura.</p>
+<p>Experimente:</p>
+<pre><code>const alturaCamera = 1.6;</code></pre>
+<ul>
+  <li><code>1.2</code>: câmera mais baixa.</li>
+  <li><code>1.5</code>: altura intermediária.</li>
+  <li><code>1.7</code>: câmera mais alta.</li>
+  <li><code>1.9</code>: câmera ainda mais alta.</li>
+</ul>
+<p>Esses valores são referências iniciais e dependem da escala do personagem.</p>
+<p><strong>Atenção:</strong> o código considera que o personagem olha inicialmente para o eixo positivo Z (<code>+Z</code>). Se a câmera ficar voltada para trás, será necessário inverter o sinal de <code>direcaoOlhar</code>.</p>
+
+<p>Para deixar a movimentação da câmera em primeira pessoa mais suave, principalmente quando o jogador muda de direção usando as teclas <strong>W, A, S e D</strong>, recomendo trabalhar com dois tipos de suavização:</p>
+<ol start="1">
+  <li><strong>Suavização da posição:</strong> evita que a câmera acompanhe os movimentos de maneira brusca.</li>
+  <li><strong>Suavização da rotação:</strong> evita que a visão mude instantaneamente quando o personagem vira para outra direção.</li>
+</ol>
+<p>No seu projeto Three.js, podemos fazer isso sem alterar toda a programação do personagem.</p>
+<h2>1. Crie um objeto auxiliar para suavizar a rotação</h2>
+<p>Fora da função <code>animar()</code>, junto das outras variáveis da câmera, adicione:</p>
+<pre><code>// Objeto auxiliar para suavizar a rotação da câmera
+const cameraOrientacao = new THREE.Object3D();</code></pre>
+<h2>2. Substitua o código atual da câmera</h2>
+<p>Dentro da função <code>animar()</code>, substitua o trecho da câmera pelo seguinte:</p>
+<div class="code-block">
+                    <div class="code-header">
+                        <span>game.js</span>
+                         
+                    </div>
+<pre><code>
+
+<p>// ==================================================<br>// CÂMERA EM PRIMEIRA PESSOA<br>// ==================================================</p>
+<p>// Altura da câmera<br>const alturaCamera = 1.6;</p>
+<p>// Posição da câmera no rosto do personagem<br>const deslocamentoCamera = new THREE.Vector3(<br>&nbsp; &nbsp; 0,<br>&nbsp; &nbsp; alturaCamera,<br>&nbsp; &nbsp; 0.1<br>);</p>
+<p>// Acompanhar a rotação do personagem<br>deslocamentoCamera.applyQuaternion(<br>&nbsp; &nbsp; personagem.quaternion<br>);</p>
+<p>// Calcular posição desejada<br>const posicaoDesejada = new THREE.Vector3(<br>&nbsp; &nbsp; personagem.position.x + deslocamentoCamera.x,<br>&nbsp; &nbsp; personagem.position.y + deslocamentoCamera.y,<br>&nbsp; &nbsp; personagem.position.z + deslocamentoCamera.z<br>);</p>
+<p>// ==================================================<br>// SUAVIZAR POSIÇÃO DA CÂMERA<br>// ==================================================</p>
+<p>camera.position.lerp(<br>&nbsp; &nbsp; posicaoDesejada,<br>&nbsp; &nbsp; 1 - Math.exp(-5 * delta)<br>);</p>
+<p>// ==================================================<br>// SUAVIZAR ROTAÇÃO DA CÂMERA<br>// ==================================================</p>
+<p>// Definir para onde a câmera deve olhar<br>const direcaoOlhar = new THREE.Vector3(0, 0, 1);</p>
+<p>direcaoOlhar.applyQuaternion(<br>&nbsp; &nbsp; personagem.quaternion<br>);</p>
+<p>// Definir o alvo da câmera<br>alvoCamera.copy(posicaoDesejada).add(<br>&nbsp; &nbsp; direcaoOlhar.multiplyScalar(10)<br>);</p>
+<p>// Calcular a orientação desejada<br>cameraOrientacao.position.copy(camera.position);</p>
+<p>cameraOrientacao.lookAt(alvoCamera);</p>
+<blockquote>
+  <pre>// Aplicar rotação suave<br>camera.quaternion.slerp(<br>&nbsp; &nbsp; cameraOrientacao.quaternion,<br>&nbsp; &nbsp; 1 - Math.exp(-3 * delta)<br>);</pre>
+</blockquote>
+
+</code></pre>
+</div>
+
+<p><strong>Importante:</strong> não coloque <code>camera.lookAt(alvoCamera)</code> depois desse código, pois isso substituiria a rotação suavizada por uma rotação instantânea.</p>
+<h2>3. Como controlar a suavidade?</h2>
+<p>Você pode experimentar diferentes valores:</p>
+<table>
+  <thead>
+    <tr>
+      <th>Valor</th>
+      <th>Comportamento</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>1</code></td>
+      <td>Rotação muito lenta</td>
+    </tr>
+    <tr>
+      <td><code>2</code></td>
+      <td>Rotação suave</td>
+    </tr>
+    <tr>
+      <td><code>3</code></td>
+      <td>Rotação intermediária</td>
+    </tr>
+    <tr>
+      <td><code>5</code></td>
+      <td>Rotação mais rápida</td>
+    </tr>
+    <tr>
+      <td><code>8</code></td>
+      <td>Rotação bastante rápida</td>
+    </tr>
+  </tbody>
+</table>
+<p>Neste trecho:</p>
+<pre><code>camera.quaternion.slerp(
+    cameraOrientacao.quaternion,
+    1 - Math.exp(-3 * delta)
+);
+</code></pre>
+<p>O número <code>3</code> controla a velocidade da rotação.</p>
+<p>Já neste:</p>
+<pre><code>camera.position.lerp(
+    posicaoDesejada,
+    1 - Math.exp(-5 * delta)
+);</code></pre>
+<p>O número <code>5</code> controla a velocidade com que a câmera acompanha a posição do personagem.</p>
+<h2>4. Minha sugestão inicial</h2>
+<p>Para um jogo de exploração em primeira pessoa, começaria com:</p>
+<pre><code>// Suavidade da posição
+1 - Math.exp(-5 * delta)
+
+// Suavidade da rotação
+1 - Math.exp(-2 * delta)</code></pre>
+<p>Assim, a câmera acompanha o personagem rapidamente, mas gira de maneira mais gradual.</p>
+<pre><strong>Uma observação importante:</strong> se você pretende implementar o controle de visão pelo mouse, recomendo separar a rotação horizontal do personagem da rotação vertical da câmera. Isso permitirá uma experiência muito mais próxima de um jogo FPS tradicional.</pre>
+            </section>
 
         </main>
     </div>
