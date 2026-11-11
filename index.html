@@ -1953,7 +1953,30 @@ git push </pre>
                     <div class="step-title-group">
                         <h2>Mudar câmera para Primeira Pessoa.</h2>
                         <p>No código no game.js, dentro da função animar(), faça os ajustes necessários: </p>
-                    <pre>2. Como funciona?</pre>
+                        
+                    <div class="code-block">
+                    <div class="code-header">
+                        <span>game.js</span>
+                         
+                    </div>
+                    <pre>
+<p>// ==================================================<br>// CÂMERA EM PRIMEIRA PESSOA<br>// ==================================================</p>
+<p>// Altura da câmera em relação ao personagem<br>const alturaCamera = 1.6;</p>
+<p>// Pequeno deslocamento para posicionar a câmera no rosto<br>const deslocamentoFrontal = 0.1;</p>
+<p>// Calcular a posição da câmera<br>const deslocamentoCamera = new THREE.Vector3(<br>&nbsp; &nbsp; 0,<br>&nbsp; &nbsp; alturaCamera,<br>&nbsp; &nbsp; deslocamentoFrontal<br>);</p>
+<p>// Girar o deslocamento conforme a direção do personagem<br>deslocamentoCamera.applyQuaternion(<br>&nbsp; &nbsp; personagem.quaternion<br>);</p>
+<p>// Definir a posição desejada da câmera<br>const posicaoDesejada = new THREE.Vector3(<br>&nbsp; &nbsp; personagem.position.x + deslocamentoCamera.x,<br>&nbsp; &nbsp; personagem.position.y + deslocamentoCamera.y,<br>&nbsp; &nbsp; personagem.position.z + deslocamentoCamera.z<br>);</p>
+<p>// Movimento suave da câmera<br>camera.position.lerp(<br>&nbsp; &nbsp; posicaoDesejada,<br>&nbsp; &nbsp; 1 - Math.exp(-5 * delta)<br>);</p>
+<p>// Definir para onde a câmera deve olhar<br>const direcaoOlhar = new THREE.Vector3(0, 0, 1);</p>
+<p>// Girar a direção conforme a orientação do personagem<br>direcaoOlhar.applyQuaternion(<br>&nbsp; &nbsp; personagem.quaternion<br>);</p>
+<p>// Definir o ponto observado pela câmera<br>alvoCamera.copy(posicaoDesejada).add(<br>&nbsp; &nbsp; direcaoOlhar.multiplyScalar(10)<br>);</p>
+<p>// Orientar a câmera<br>camera.lookAt(alvoCamera);</p>
+
+                        </pre>
+                    </div>
+ 
+                    
+                        <pre>2. Como funciona?</pre>
 <p>As principais alterações são:</p>
 <table>
   <thead>
